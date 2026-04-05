@@ -26,12 +26,11 @@
   .nav-links { display: flex; gap: 40px; list-style: none; }
   .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white70); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover, .nav-links a.active { color: var(--white); }
-  .nav-cta { font-size: 11px !important; font-weight: 700 !important; letter-spacing: 0.18em !important; color: var(--red) !important; border: 1px solid var(--red); padding: 10px 22px; transition: all 0.25s !important; }
+  .nav-cta { font-size: 11px !important; font-weight: 700 !important; letter-spacing: 0.18em !important; color: var(--red) !important; border: 1px solid var(--red); padding: 10px 22px; transition: all 0.25s !important; text-decoration: none; }
   .nav-cta:hover { background: var(--red) !important; color: var(--white) !important; }
   .menu-toggle { display: none; cursor: pointer; z-index: 101; }
   .menu-toggle i { font-size: 24px; color: var(--white); }
-  section { position: relative; }
-  /* PAGE HERO */
+  
   .page-hero { min-height: 45vh; display: flex; align-items: flex-end; padding: 140px 60px 80px; position: relative; overflow: hidden; border-bottom: 1px solid var(--white08); }
   .page-hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 70% at 50% 100%, rgba(212,66,10,0.1) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 80% 20%, rgba(90,10,212,0.07) 0%, transparent 50%); }
   .page-hero-content { position: relative; z-index: 2; }
@@ -39,7 +38,7 @@
   .page-hero-label::before { content: ''; display: block; width: 40px; height: 1px; background: var(--teal); }
   .page-hero-title { font-family: var(--serif); font-size: clamp(56px, 7vw, 96px); font-weight: 300; line-height: 1.0; color: var(--white); opacity: 0; animation: fadeUp 0.9s 0.35s forwards; }
   .page-hero-title em { font-style: italic; color: var(--red); }
-  /* BOOKING */
+
   .booking-section { padding: 100px 60px; text-align: center; }
   .section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--violet); margin-bottom: 16px; }
   .booking-intro { font-size: 15px; color: var(--white40); max-width: 440px; margin: 0 auto 60px; }
@@ -47,33 +46,31 @@
   .form-field { background: var(--void-soft); padding: 0; }
   .form-field.full { grid-column: span 2; }
   .form-field input, .form-field select, .form-field textarea { width: 100%; background: transparent; border: none; outline: none; padding: 24px 28px; font-family: var(--sans); font-size: 14px; font-weight: 400; color: var(--white); letter-spacing: 0.03em; appearance: none; -webkit-appearance: none; }
-  .form-field select { cursor: pointer; }
   .form-field input::placeholder, .form-field textarea::placeholder { color: var(--white40); }
-  .form-field select option { background: var(--void); }
+  .form-field select option { background: var(--void); color: white; }
   .form-field textarea { resize: none; min-height: 120px; }
   .form-submit { grid-column: span 2; background: var(--red); border: none; padding: 22px; font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--white); cursor: pointer; transition: background 0.25s; }
   .form-submit:hover { background: #b8360a; }
+  .form-submit:disabled { background: var(--void-lifted); cursor: not-allowed; }
+
   #form-success { display: none; margin-top: 40px; }
-  /* OR DIVIDER */
   .or-divider { display: flex; align-items: center; gap: 20px; max-width: 700px; margin: 40px auto; }
   .or-divider::before, .or-divider::after { content: ''; flex: 1; height: 1px; background: var(--white08); }
   .or-divider span { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white15); }
-  /* WHATSAPP ALT */
   .whatsapp-alt { max-width: 700px; margin: 0 auto; }
   .whatsapp-cta { display: block; text-align: center; background: rgba(37,211,102,0.08); border: 1px solid rgba(37,211,102,0.3); padding: 22px 28px; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #25d366; text-decoration: none; transition: all 0.25s; }
   .whatsapp-cta:hover { background: rgba(37,211,102,0.15); }
-  /* FOOTER */
+
   footer { padding: 48px 60px; border-top: 1px solid var(--white08); display: flex; align-items: center; justify-content: space-between; }
   .footer-logo { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--white70); }
   .footer-logo span { color: var(--red); }
   .footer-tagline { font-family: var(--serif); font-size: 14px; font-style: italic; color: var(--white40); }
   .footer-copy { font-size: 11px; color: var(--white15); letter-spacing: 0.08em; }
+
   @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
   .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
+
   @media (max-width: 900px) {
     nav { padding: 20px 24px; }
     .nav-links { display: none; }
@@ -85,26 +82,12 @@
   }
   @media (max-width: 768px) {
     .menu-toggle { display: block; }
-    .nav-links {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 80%;
-      height: 100vh;
-      background: var(--void-mid);
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 30px;
-      transition: 0.4s ease-in-out;
-      backdrop-filter: blur(10px);
-      border-left: 1px solid var(--white08);
-      z-index: 100;
+    .nav-links.active { 
+      display: flex; position: fixed; top: 0; right: 0; width: 80%; height: 100vh; 
+      background: var(--void-mid); flex-direction: column; align-items: center; 
+      justify-content: center; gap: 30px; z-index: 100; border-left: 1px solid var(--white08);
     }
-    .nav-links.active { right: 0; }
     .page-hero-title { font-size: 45px !important; }
-    .services-grid, .process-grid { grid-template-columns: 1fr !important; }
-    .booking-form { grid-template-columns: 1fr !important; }
   }
 </style>
 </head>
@@ -113,8 +96,8 @@
 <nav>
   <a href="index.html" class="nav-logo">Arty<span>.</span>Visuals</a>
   <div class="menu-toggle" id="mobile-menu">
-  <i class="fas fa-bars"></i>
-</div>
+    <i class="fas fa-bars"></i>
+  </div>
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
     <li><a href="services.html">Services</a></li>
@@ -135,14 +118,13 @@
 
 <section class="booking-section">
   <div class="section-label reveal">Book a Session</div>
-  <p class="booking-intro reveal reveal-delay-1">Tell us about your project and we'll get back within 24 hours with a tailored proposal.</p>
+  <p class="booking-intro reveal">Tell us about your project and we'll get back within 24 hours with a tailored proposal.</p>
 
   <form 
-    class="booking-form reveal reveal-delay-2" 
+    class="booking-form reveal" 
     id="booking-form"
     action="https://formspree.io/f/xzdkkkga" 
     method="POST"
-    onsubmit="handleSubmit(event)"
   >
     <div class="form-field">
       <input type="text" name="name" placeholder="Your Name" required>
@@ -154,23 +136,22 @@
       <input type="tel" name="phone" placeholder="Phone / WhatsApp">
     </div>
     <div class="form-field">
-      <select name="service">
+      <select name="service" required>
         <option value="" disabled selected>Service Needed</option>
-        <option>Photography</option>
-        <option>Videography</option>
-        <option>Cinematography</option>
-        <option>Graphic Design</option>
-        <option>Brand Identity</option>
-        <option>Graphics Printing</option>
-        <option>Multiple Services</option>
+        <option value="Photography">Photography</option>
+        <option value="Videography">Videography</option>
+        <option value="Cinematography">Cinematography</option>
+        <option value="Graphic Design">Graphic Design</option>
+        <option value="Brand Identity">Brand Identity</option>
+        <option value="Graphics Printing">Graphics Printing</option>
+        <option value="Multiple Services">Multiple Services</option>
       </select>
     </div>
     <div class="form-field full">
-      <textarea name="message" placeholder="Tell us about your project — the story, the goals, the vision..."></textarea>
+      <textarea name="message" placeholder="Tell us about your project — the story, the goals, the vision..." required></textarea>
     </div>
     
     <input type="hidden" name="_subject" value="New Booking Enquiry — Arty Visuals">
-    
     <button type="submit" id="submit-btn" class="form-submit">Send Enquiry →</button>
   </form>
 
@@ -192,76 +173,39 @@
 <footer>
   <div class="footer-logo">Arty<span>.</span>Visuals</div>
   <div class="footer-tagline">"Honest Art."</div>
-  
-  <div class="footer-socials" style="margin: 20px 0; display: flex; flex-direction: column; gap: 8px; font-size: 13px; letter-spacing: 0.05em;">
-    <a href="https://wa.me/254705214338" target="_blank" style="color: var(--white70); text-decoration: none;">
-      WhatsApp: 0705214338 — Click to redirect for instant booking.
-    </a>
-    <a href="/cdn-cgi/l/email-protection#d5a1bdb0b4a7a1aca3bca6a0b4b9a695b2b8b4bcb9fbb6bab8" style="color: var(--white70); text-decoration: none;">
-      Email: <span class="__cf_email__" data-cfemail="72061a171300060b041b0107131e0132151f131b1e5c111d1f">[email&#160;protected]</span>
-    </a>
-    <div style="display: flex; justify-content: center; gap: 20px; margin-top: 10px;">
-      <a href="https://instagram.com/artyv.isuals" target="_blank" style="color: var(--white70); text-decoration: none;">Instagram</a>
-      <a href="https://www.facebook.com/profile.php?id=61576486607504&mibextid=rS40aB7S9Ucbxw6v" target="_blank" style="color: var(--white70); text-decoration: none;">Facebook</a>
-      <a href="https://tiktok.com/@arty_visuals" target="_blank" style="color: var(--white70); text-decoration: none;">TikTok</a>
-    </div>
-  </div>
-
   <div class="footer-copy">© 2025 Arty Visuals · Ian Kibet · Nairobi, Kenya</div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
+  // Animation Observer
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  async function handleSubmit(event) {
+  // Mobile Menu Logic
+  const menuToggle = document.getElementById('mobile-menu');
+  const navLinks = document.querySelector('.nav-links');
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    menuToggle.querySelector('i').classList.toggle('fa-bars');
+    menuToggle.querySelector('i').classList.toggle('fa-times');
+  });
+
+  // Working Formspree Submission Logic
+  const form = document.getElementById('booking-form');
+  const button = document.getElementById('submit-btn');
+  const successMsg = document.getElementById('form-success');
+
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    const form = event.target;
-    const data = new FormData(form);
-    const button = form.querySelector('button');
-    
-    // UI Feedback: Show the user it is processing
-    button.textContent = "Sending...";
     button.disabled = true;
+    button.textContent = "Sending...";
+
+    const data = new FormData(event.target);
 
     try {
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: {
-          'Accept': 'application/json' // CRITICAL: This tells Formspree to process properly
-        }
-      });
-
-      if (response.ok) {
-        // Success state: Hide the form and show your success message
-        form.style.display = 'none';
-        document.getElementById('form-success').style.display = 'block';
-        
-        // Redirect to WhatsApp after 1.5 seconds
-        setTimeout(() => {
-          const msg = encodeURIComponent("Hello Arty Visuals! I just submitted a project enquiry through your website and would love to discuss it further.");
-          window.open('https://wa.me/254705214338?text=' + msg, '_blank');
-        }, 1500);
-      } else {
-        // If Formspree returns an error
-        const errorData = await response.json();
-        alert("Submission failed: " + (errorData.error || "Check your Formspree ID."));
-        button.textContent = "Send Enquiry →";
-        button.disabled = false;
-      }
-    } catch (error) {
-      // Network or connection error
-      alert("Connectivity issue. Please check your internet and try again.");
-      button.textContent = "Send Enquiry →";
-      button.disabled = false;
-    }
-  }
-
-    try {
-      const response = await fetch(form.action, {
+      const response = await fetch(event.target.action, {
         method: 'POST',
         body: data,
         headers: { 'Accept': 'application/json' }
@@ -269,32 +213,25 @@
 
       if (response.ok) {
         form.style.display = 'none';
-        document.getElementById('form-success').style.display = 'block';
+        successMsg.style.display = 'block';
         
-        // Redirect to WhatsApp with a pre-filled message after showing confirmation
+        // Redirect to WhatsApp after 1.5s
         setTimeout(() => {
           const msg = encodeURIComponent("Hello Arty Visuals! I just submitted a project enquiry through your website and would love to discuss it further.");
           window.open('https://wa.me/254705214338?text=' + msg, '_blank');
         }, 1500);
       } else {
-        alert("Oops! There was a problem sending your enquiry. Please try again or use WhatsApp.");
-        button.textContent = "Send Enquiry →";
+        const errorData = await response.json();
+        alert("Oops! " + (errorData.errors ? errorData.errors.map(e => e.message).join(", ") : "Submission failed."));
         button.disabled = false;
+        button.textContent = "Send Enquiry →";
       }
     } catch (error) {
-      alert("Connectivity issue. Please check your internet and try again.");
-      button.textContent = "Send Enquiry →";
+      alert("Connectivity issue. Please check your internet connection.");
       button.disabled = false;
+      button.textContent = "Send Enquiry →";
     }
-</script>
-<script>
-  const menuToggle = document.getElementById('mobile-menu');
-  const navLinks = document.querySelector('.nav-links');
-
-  menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    // Change icon between bars and times (X)
-    const icon = menuToggle.querySelector('i');
-    icon.classList.toggle('fa-bars');
   });
 </script>
+</body>
+</html>
