@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arty Visuals — Honest Art.</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #0D0D0D; --void-soft: #141414; --void-mid: #1A1A1A; --void-lifted: #222222;
+    --red: #D4420A; --red-glow: rgba(212,66,10,0.15);
+    --teal: #0A7A5A; --teal-glow: rgba(10,122,90,0.12);
+    --violet: #5A0AD4;
+    --ember: #FDE8E0; --mist: #E0F5EE; --dusk: #EDE0FD; --canvas: #F7F5F2;
+    --white: #ffffff; --white70: rgba(255,255,255,0.7); --white40: rgba(255,255,255,0.4);
+    --white15: rgba(255,255,255,0.15); --white08: rgba(255,255,255,0.08); --white04: rgba(255,255,255,0.04);
+    --serif: 'Cormorant Garamond', Georgia, serif; --sans: 'Syne', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--void); color: var(--white); font-family: var(--sans); font-weight: 400; line-height: 1.6; overflow-x: hidden; }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.6;
+  }
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 24px 60px; display: flex; align-items: center; justify-content: space-between; background: linear-gradient(180deg, rgba(13,13,13,0.95) 0%, transparent 100%); backdrop-filter: blur(2px); }
+  .nav-logo { font-family: var(--serif); font-size: 22px; font-weight: 600; letter-spacing: 0.04em; color: var(--white); text-decoration: none; }
+  .nav-logo span { color: var(--red); }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white70); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--white); }
+  .nav-cta { font-size: 11px !important; font-weight: 700 !important; letter-spacing: 0.18em !important; color: var(--red) !important; border: 1px solid var(--red); padding: 10px 22px; transition: all 0.25s !important; }
+  .nav-cta:hover { background: var(--red) !important; color: var(--white) !important; }
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; align-items: center; padding: 0 60px; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 60% at 70% 50%, rgba(212,66,10,0.08) 0%, transparent 60%), radial-gradient(ellipse 40% 50% at 20% 80%, rgba(10,122,90,0.06) 0%, transparent 55%), radial-gradient(ellipse 30% 40% at 80% 20%, rgba(90,10,212,0.07) 0%, transparent 50%); }
+  .hero-grid-lines { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 80px 80px; mask-image: radial-gradient(ellipse 70% 70% at center, black, transparent); }
+  .hero-content { position: relative; z-index: 2; max-width: 900px; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal); margin-bottom: 32px; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
+  .hero-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--teal); }
+  .hero-headline { font-family: var(--serif); font-size: clamp(64px, 8vw, 110px); font-weight: 300; line-height: 1.0; letter-spacing: -0.01em; color: var(--white); opacity: 0; animation: fadeUp 0.9s 0.35s forwards; }
+  .hero-headline em { font-style: italic; color: var(--red); }
+  .hero-sub { font-size: 15px; font-weight: 400; color: var(--white40); letter-spacing: 0.06em; margin-top: 28px; max-width: 480px; line-height: 1.7; opacity: 0; animation: fadeUp 0.9s 0.5s forwards; }
+  .hero-actions { display: flex; align-items: center; gap: 28px; margin-top: 48px; opacity: 0; animation: fadeUp 0.9s 0.65s forwards; }
+  .btn-primary { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--void); background: var(--white); border: none; padding: 16px 36px; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.25s; }
+  .btn-primary:hover { background: var(--ember); transform: translateY(-1px); }
+  .btn-ghost { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white70); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .btn-ghost::after { content: '→'; transition: transform 0.2s; }
+  .btn-ghost:hover { color: var(--white); }
+  .btn-ghost:hover::after { transform: translateX(4px); }
+  .hero-scroll { position: absolute; bottom: 40px; left: 60px; display: flex; align-items: center; gap: 12px; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white40); opacity: 0; animation: fadeIn 1s 1.2s forwards; }
+  .hero-scroll::before { content: ''; width: 1px; height: 40px; background: linear-gradient(to bottom, transparent, var(--white40)); animation: scrollLine 2s 1.5s ease-in-out infinite; }
+  /* SERVICES STRIP */
+  .services-strip { padding: 40px 60px; border-top: 1px solid var(--white08); border-bottom: 1px solid var(--white08); display: flex; gap: 0; overflow: hidden; }
+  .service-tag { flex: 1; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white40); padding: 0 40px 0 0; border-right: 1px solid var(--white08); transition: color 0.2s; cursor: default; }
+  .service-tag:first-child { padding-left: 0; }
+  .service-tag:last-child { border-right: none; }
+  .service-tag:hover { color: var(--white); }
+  /* QUICK INTRO */
+  .quick-intro { padding: 120px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+  .qi-label { font-size: 10px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--teal); margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+  .qi-label::after { content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--teal); }
+  .qi-headline { font-family: var(--serif); font-size: clamp(40px, 4vw, 60px); font-weight: 300; line-height: 1.15; color: var(--white); margin-bottom: 28px; }
+  .qi-headline em { font-style: italic; color: var(--red); }
+  .qi-body { font-size: 15px; color: var(--white70); line-height: 1.85; margin-bottom: 16px; }
+  .pillars-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .pillar { background: var(--void-mid); padding: 32px 28px; transition: background 0.25s; cursor: default; }
+  .pillar:hover { background: var(--void-lifted); }
+  .pillar-num { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; color: var(--red); margin-bottom: 10px; }
+  .pillar-name { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--white); margin-bottom: 8px; }
+  .pillar-desc { font-size: 12px; color: var(--white40); line-height: 1.7; }
+  /* STATS */
+  .stats-section { padding: 100px 60px; background: var(--void-mid); display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background-color: var(--white08); }
+  .stat-block { background: var(--void-mid); padding: 56px 40px; text-align: center; }
+  .stat-number { font-family: var(--serif); font-size: 64px; font-weight: 300; color: var(--white); line-height: 1; margin-bottom: 12px; }
+  .stat-number span { color: var(--red); }
+  .stat-label { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white40); }
+  /* CTA BAND */
+  .cta-band { padding: 120px 60px; text-align: center; position: relative; overflow: hidden; }
+  .cta-band-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 70% at 50% 100%, rgba(212,66,10,0.1) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 20% 20%, rgba(90,10,212,0.07) 0%, transparent 50%); }
+  .cta-headline { font-family: var(--serif); font-size: clamp(48px, 6vw, 88px); font-weight: 300; line-height: 1.1; color: var(--white); margin: 20px auto 40px; max-width: 700px; position: relative; }
+  .cta-headline em { font-style: italic; color: var(--red); }
+  .cta-actions { display: flex; align-items: center; justify-content: center; gap: 28px; position: relative; }
+  /* FOOTER */
+  footer { padding: 48px 60px; border-top: 1px solid var(--white08); display: flex; align-items: center; justify-content: space-between; }
+  .footer-logo { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--white70); }
+  .footer-logo span { color: var(--red); }
+  .footer-tagline { font-family: var(--serif); font-size: 14px; font-style: italic; color: var(--white40); }
+  .footer-copy { font-size: 11px; color: var(--white15); letter-spacing: 0.08em; }
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes scrollLine { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+  section { position: relative; }
+  /* MOBILE */
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 0 24px; }
+    .hero-scroll { left: 24px; }
+    .services-strip { padding: 28px 24px; flex-wrap: wrap; gap: 12px; }
+    .service-tag { border-right: none; padding: 0; flex: none; }
+    .quick-intro { grid-template-columns: 1fr; padding: 80px 24px; gap: 60px; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    .stats-section { grid-template-columns: 1fr 1fr; padding: 60px 24px; }
+    .cta-band { padding: 80px 24px; }
+    footer { flex-direction: column; gap: 20px; text-align: center; padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Arty<span>.</span>Visuals</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="founder.html">Founder</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="booking.html" class="nav-cta">Book Us</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Premium Creative Studio · Nairobi, Kenya</div>
+    <h1 class="hero-headline">Honest<br><em>Art.</em></h1>
+    <p class="hero-sub">Photography · Videography · Cinematography · Graphic Design · Brand Identity · Graphics Printing</p>
+    <div class="hero-actions">
+      <a href="work.html" class="btn-primary">View Our Work</a>
+      <a href="booking.html" class="btn-ghost">Book a Session</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<div class="services-strip">
+  <div class="service-tag">Photography</div>
+  <div class="service-tag">Videography</div>
+  <div class="service-tag">Cinematography</div>
+  <div class="service-tag">Graphic Design</div>
+  <div class="service-tag">Brand Identity</div>
+  <div class="service-tag">Graphics Printing</div>
+</div>
+
+<section class="quick-intro">
+  <div>
+    <div class="qi-label reveal">Our Story</div>
+    <h2 class="qi-headline reveal reveal-delay-1">Born from a contradiction.<br><em>Built on craft.</em></h2>
+    <p class="qi-body reveal reveal-delay-2">Arty Visuals was born in Nairobi from a contradiction: an agriculture student whose eyes were always on the frame, not the field. Ian Kibet carved his own path — driven by an unshakeable passion for photography, film, design and brand identity.</p>
+    <p class="qi-body reveal reveal-delay-3">Today, Arty Visuals serves creatives, artists and visionary brands across Kenya who demand work that reflects the same level of ambition they bring to their own craft.</p>
+    <div style="margin-top: 36px;" class="reveal reveal-delay-4">
+      <a href="about.html" class="btn-ghost">Read Our Story</a>
+    </div>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar reveal">
+      <div class="pillar-num">01</div>
+      <div class="pillar-name">Artistry</div>
+      <p class="pillar-desc">Every piece carries a soul. The brief is the starting point — the work goes further.</p>
+    </div>
+    <div class="pillar reveal reveal-delay-1">
+      <div class="pillar-num">02</div>
+      <div class="pillar-name">Precision</div>
+      <p class="pillar-desc">Details are not an afterthought. We refine every frame until it is exactly right.</p>
+    </div>
+    <div class="pillar reveal reveal-delay-2">
+      <div class="pillar-num">03</div>
+      <div class="pillar-name">Boldness</div>
+      <p class="pillar-desc">We do not play safe. Premium does not mean timid — it means confident.</p>
+    </div>
+    <div class="pillar reveal reveal-delay-3">
+      <div class="pillar-num">04</div>
+      <div class="pillar-name">Elevation</div>
+      <p class="pillar-desc">Every project leaves our studio better than it arrived, better than anything comparable.</p>
+    </div>
+    <div class="pillar reveal reveal-delay-4" style="grid-column: span 2;">
+      <div class="pillar-num">05</div>
+      <div class="pillar-name">Authenticity</div>
+      <p class="pillar-desc">Ian's unconventional path is the spirit of the brand. Genuine creativity, honest craft, real results.</p>
+    </div>
+  </div>
+</section>
+
+<div class="stats-section">
+  <div class="stat-block reveal">
+    <div class="stat-number">4<span>+</span></div>
+    <div class="stat-label">Service Disciplines</div>
+  </div>
+  <div class="stat-block reveal reveal-delay-1">
+    <div class="stat-number">4<span>×</span></div>
+    <div class="stat-label">City Presence</div>
+  </div>
+  <div class="stat-block reveal reveal-delay-2">
+    <div class="stat-number">1<span>.</span></div>
+    <div class="stat-label">Standard: Premium</div>
+  </div>
+  <div class="stat-block reveal reveal-delay-3">
+    <div class="stat-number">∞<span>.</span></div>
+    <div class="stat-label">Creative Ambition</div>
+  </div>
+</div>
+
+<section class="cta-band">
+  <div class="cta-band-bg"></div>
+  <div class="section-label reveal" style="text-align:center; color: var(--violet);">Start a Project</div>
+  <h2 class="cta-headline reveal reveal-delay-1">Your vision.<br><em>Elevated to art.</em></h2>
+  <div class="cta-actions reveal reveal-delay-2">
+    <a href="booking.html" class="btn-primary">Book a Session</a>
+    <a href="https://wa.me/254705214338" class="btn-ghost" target="_blank">WhatsApp Us</a>
+  </div>
+</section>
+
+<footer style="padding: 80px 20px; border-top: 1px solid var(--white08); text-align: center; background: var(--void);">
+  <div class="footer-logo" style="margin-bottom: 10px;">Arty<span>.</span>Visuals</div>
+  <div class="footer-tagline" style="font-family: var(--serif); font-style: italic; color: var(--white40); margin-bottom: 40px;">"Honest Art."</div>
+  
+  <div class="footer-social-grid" style="max-width: 600px; margin: 0 auto 40px; display: flex; flex-direction: column; gap: 24px; align-items: center;">
+    
+    <a href="https://wa.me/254705214338" target="_blank" style="text-decoration: none; color: var(--white); display: flex; align-items: center; gap: 12px; font-size: 14px; letter-spacing: 0.1em; border: 1px solid var(--white15); padding: 12px 24px; transition: 0.3s;">
+      <i class="fab fa-whatsapp" style="color: #25D366; font-size: 1.2rem;"></i>
+      WHATSAPP: 0705214338 — INSTANT BOOKING
+    </a>
+
+    <div style="display: flex; gap: 30px; align-items: center; justify-content: center; flex-wrap: wrap;">
+      <a href="mailto:theartyvisuals@gmail.com" title="Email" style="color: var(--white70); text-decoration: none; font-size: 1.3rem; transition: 0.3s;"><i class="fas fa-envelope"></i></a>
+      <a href="https://instagram.com/artyv.isuals" target="_blank" title="Instagram" style="color: var(--white70); text-decoration: none; font-size: 1.3rem; transition: 0.3s;"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.facebook.com/profile.php?id=61576486607504" target="_blank" title="Facebook" style="color: var(--white70); text-decoration: none; font-size: 1.3rem; transition: 0.3s;"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://tiktok.com/@arty_visuals" target="_blank" title="TikTok" style="color: var(--white70); text-decoration: none; font-size: 1.3rem; transition: 0.3s;"><i class="fab fa-tiktok"></i></a>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 5px; font-size: 11px; color: var(--white40); letter-spacing: 0.15em; text-transform: uppercase;">
+      <span>theartyvisuals@gmail.com</span>
+      <span>@artyv.isuals • @arty_visuals</span>
+    </div>
+  </div>
+
+  <div class="footer-copy" style="font-size: 10px; color: var(--white15); letter-spacing: 0.2em; text-transform: uppercase;">
+    © 2026 Arty Visuals · Ian Kibet · Nairobi, Kenya
+  </div>
+</footer>
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

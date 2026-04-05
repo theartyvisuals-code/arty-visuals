@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Founder — Arty Visuals</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #0D0D0D; --void-soft: #141414; --void-mid: #1A1A1A; --void-lifted: #222222;
+    --red: #D4420A; --teal: #0A7A5A; --violet: #5A0AD4;
+    --ember: #FDE8E0;
+    --white: #ffffff; --white70: rgba(255,255,255,0.7); --white40: rgba(255,255,255,0.4);
+    --white15: rgba(255,255,255,0.15); --white08: rgba(255,255,255,0.08); --white04: rgba(255,255,255,0.04);
+    --serif: 'Cormorant Garamond', Georgia, serif; --sans: 'Syne', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--void); color: var(--white); font-family: var(--sans); font-weight: 400; line-height: 1.6; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.6; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 24px 60px; display: flex; align-items: center; justify-content: space-between; background: linear-gradient(180deg, rgba(13,13,13,0.95) 0%, transparent 100%); backdrop-filter: blur(2px); }
+  .nav-logo { font-family: var(--serif); font-size: 22px; font-weight: 600; letter-spacing: 0.04em; color: var(--white); text-decoration: none; }
+  .nav-logo span { color: var(--red); }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white70); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--white); }
+  .nav-cta { font-size: 11px !important; font-weight: 700 !important; letter-spacing: 0.18em !important; color: var(--red) !important; border: 1px solid var(--red); padding: 10px 22px; transition: all 0.25s !important; }
+  .nav-cta:hover { background: var(--red) !important; color: var(--white) !important; }
+  section { position: relative; }
+  .btn-primary { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--void); background: var(--white); border: none; padding: 16px 36px; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.25s; }
+  .btn-primary:hover { background: var(--ember); transform: translateY(-1px); }
+  .btn-ghost { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white70); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .btn-ghost::after { content: '→'; transition: transform 0.2s; }
+  .btn-ghost:hover { color: var(--white); }
+  .btn-ghost:hover::after { transform: translateX(4px); }
+  /* PAGE HERO */
+  .page-hero { min-height: 45vh; display: flex; align-items: flex-end; padding: 140px 60px 80px; position: relative; overflow: hidden; border-bottom: 1px solid var(--white08); }
+  .page-hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 60% at 70% 50%, rgba(212,66,10,0.07) 0%, transparent 60%), radial-gradient(ellipse 40% 50% at 20% 80%, rgba(10,122,90,0.05) 0%, transparent 55%); }
+  .page-hero-content { position: relative; z-index: 2; }
+  .page-hero-label { font-size: 10px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--teal); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
+  .page-hero-label::before { content: ''; display: block; width: 40px; height: 1px; background: var(--teal); }
+  .page-hero-title { font-family: var(--serif); font-size: clamp(56px, 7vw, 96px); font-weight: 300; line-height: 1.0; color: var(--white); opacity: 0; animation: fadeUp 0.9s 0.35s forwards; }
+  .page-hero-title em { font-style: italic; color: var(--red); }
+  /* FOUNDER */
+  .founder-section { padding: 120px 60px; background: var(--void-soft); display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+  .founder-visual { position: relative; aspect-ratio: 3/4; background: var(--void-mid); overflow: hidden; }
+  .founder-visual::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 70%, rgba(212,66,10,0.12) 0%, transparent 60%); }
+  .founder-monogram { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 140px; font-weight: 300; font-style: italic; color: var(--white08); user-select: none; }
+  .founder-placeholder-label { position: absolute; bottom: 32px; left: 32px; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white40); }
+  .founder-frame-accent { position: absolute; top: -8px; right: -8px; width: 60%; height: 60%; border: 1px solid var(--red); pointer-events: none; }
+  .about-label { font-size: 10px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--teal); margin-bottom: 28px; display: flex; align-items: center; gap: 10px; }
+  .about-label::after { content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--teal); }
+  .about-headline { font-family: var(--serif); font-size: clamp(36px, 3.5vw, 52px); font-weight: 300; line-height: 1.15; color: var(--white); margin-bottom: 28px; }
+  .about-headline em { font-style: italic; color: var(--red); }
+  .about-body { font-size: 15px; color: var(--white70); line-height: 1.85; margin-bottom: 16px; }
+  .about-quote { margin-top: 48px; padding: 28px 32px; border-left: 2px solid var(--red); background: var(--white04); }
+  .about-quote p { font-family: var(--serif); font-size: 19px; font-style: italic; font-weight: 300; color: var(--white); line-height: 1.6; margin-bottom: 12px; }
+  .about-quote cite { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white40); font-style: normal; }
+  /* CONNECT */
+  .connect-section { padding: 100px 60px; text-align: center; }
+  .section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--violet); margin-bottom: 16px; }
+  .connect-headline { font-family: var(--serif); font-size: clamp(40px, 5vw, 72px); font-weight: 300; line-height: 1.1; color: var(--white); margin: 16px auto 48px; max-width: 600px; }
+  .connect-headline em { font-style: italic; color: var(--red); }
+  .connect-links { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+  .social-link { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--white40); text-decoration: none; padding: 12px 24px; border: 1px solid var(--white15); transition: all 0.2s; }
+  .social-link:hover { color: var(--white); border-color: var(--white40); }
+  /* FOOTER */
+  footer { padding: 48px 60px; border-top: 1px solid var(--white08); display: flex; align-items: center; justify-content: space-between; }
+  .footer-logo { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--white70); }
+  .footer-logo span { color: var(--red); }
+  .footer-tagline { font-family: var(--serif); font-size: 14px; font-style: italic; color: var(--white40); }
+  .footer-copy { font-size: 11px; color: var(--white15); letter-spacing: 0.08em; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    .page-hero { padding: 120px 24px 60px; }
+    .founder-section { grid-template-columns: 1fr; padding: 80px 24px; gap: 60px; }
+    .founder-visual { aspect-ratio: 4/3; }
+    .founder-monogram { font-size: 80px; }
+    .connect-section { padding: 80px 24px; }
+    footer { flex-direction: column; gap: 20px; text-align: center; padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Arty<span>.</span>Visuals</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="founder.html">Founder</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="booking.html" class="nav-cta">Book Us</a></li>
+  </ul>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-content">
+    <div class="page-hero-label">The Founder</div>
+    <h1 class="page-hero-title">Ian Kibet.<br><em>An unconventional<br>creative.</em></h1>
+  </div>
+</section>
+
+<section class="founder-section">
+  <div class="founder-visual reveal">
+    <div class="founder-monogram">IK</div>
+    <div class="founder-placeholder-label">Ian Kibet — Founder & Creative Director</div>
+    <div class="founder-frame-accent"></div>
+  </div>
+  <div class="founder-copy">
+    <div class="about-label reveal">Who is Ian?</div>
+    <h2 class="about-headline reveal reveal-delay-1">Agriculture student.<br><em>Artist at heart.</em></h2>
+    <p class="about-body reveal reveal-delay-2">Ian Kibet studies agriculture — but his true harvest has always been visual art. Driven by an unshakeable passion for photography, film, design and brand identity, Ian founded Arty Visuals to build a studio that stands for something rare: uncompromising quality in everything it touches.</p>
+    <p class="about-body reveal reveal-delay-3">His unconventional journey is the very soul of Arty Visuals. He believes that genuine creativity does not follow a prescribed path — it breaks one.</p>
+    <div class="about-quote reveal reveal-delay-4">
+      <p>"Honest art is the translation of existence into expression. It isn't about being the best in the room — it's about being the most authentic to the journey."</p>
+      <cite>— Ian Kibet</cite>
+    </div>
+    <div style="margin-top: 40px; display:flex; gap:20px; flex-wrap:wrap;" class="reveal reveal-delay-5">
+      <a href="booking.html" class="btn-primary">Commission Ian</a>
+      <a href="https://wa.me/254705214338" class="btn-ghost" target="_blank">WhatsApp Ian</a>
+    </div>
+  </div>
+</section>
+
+<section class="connect-section">
+  <div class="section-label reveal">Stay Connected</div>
+  <h2 class="connect-headline reveal reveal-delay-1">Follow Ian's<br><em>creative journey.</em></h2>
+  <div class="connect-links reveal reveal-delay-2">
+    <a href="https://instagram.com/artyv.isuals" class="social-link" target="_blank">Instagram</a>
+    <a href="https://facebook.com/ArtyVisuals" class="social-link" target="_blank">Facebook</a>
+    <a href="https://tiktok.com/@arty_visuals" class="social-link" target="_blank">TikTok</a>
+    <a href="https://wa.me/254705214338" class="social-link" target="_blank">WhatsApp</a>
+  </div>
+</section>
+
+<footer style="padding: 80px 20px; border-top: 1px solid var(--white08); text-align: center; background: var(--void);">
+  <div class="footer-logo" style="margin-bottom: 10px;">Arty<span>.</span>Visuals</div>
+  <div class="footer-tagline" style="font-family: var(--serif); font-style: italic; color: var(--white40); margin-bottom: 40px;">"Honest Art."</div>
+  
+  <div class="footer-social-grid" style="max-width: 600px; margin: 0 auto 40px; display: flex; flex-direction: column; gap: 24px; align-items: center;">
+    
+    <a href="https://wa.me/254705214338" target="_blank" style="text-decoration: none; color: var(--white); display: flex; align-items: center; gap: 12px; font-size: 14px; letter-spacing: 0.1em; border: 1px solid var(--white15); padding: 12px 24px; transition: 0.3s;">
+      <i class="fab fa-whatsapp" style="color: #25D366; font-size: 1.2rem;"></i>
+      WHATSAPP: 0705214338 — INSTANT BOOKING
+    </a>
+
+    <div style="display: flex; gap: 30px; align-items: center; justify-content: center; flex-wrap: wrap;">
+      <a href="mailto:theartyvisuals@gmail.com" title="Email" style="color: var(--white70); text-decoration: none; font-size: 1.3rem; transition: 0.3s;"><i class="fas fa-envelope"></i></a>
+      <a href="https://instagram.com/artyv.isuals" target="_blank" title="Instagram" style="color: var(--white70); text-decoration: none; font-size: 1.3rem; transition: 0.3s;"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.facebook.com/profile.php?id=61576486607504" target="_blank" title="Facebook" style="color: var(--white70); text-decoration: none; font-size: 1.3rem; transition: 0.3s;"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://tiktok.com/@arty_visuals" target="_blank" title="TikTok" style="color: var(--white70); text-decoration: none; font-size: 1.3rem; transition: 0.3s;"><i class="fab fa-tiktok"></i></a>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 5px; font-size: 11px; color: var(--white40); letter-spacing: 0.15em; text-transform: uppercase;">
+      <span>theartyvisuals@gmail.com</span>
+      <span>@artyv.isuals • @arty_visuals</span>
+    </div>
+  </div>
+
+  <div class="footer-copy" style="font-size: 10px; color: var(--white15); letter-spacing: 0.2em; text-transform: uppercase;">
+    © 2026 Arty Visuals · Ian Kibet · Nairobi, Kenya
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
