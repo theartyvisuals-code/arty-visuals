@@ -48,7 +48,6 @@
   .form-field input, .form-field select, .form-field textarea { width: 100%; background: transparent; border: none; outline: none; padding: 24px 28px; font-family: var(--sans); font-size: 14px; font-weight: 400; color: var(--white); letter-spacing: 0.03em; appearance: none; -webkit-appearance: none; }
   .form-field input::placeholder, .form-field textarea::placeholder { color: var(--white40); }
   .form-field select option { background: var(--void); color: white; }
-  .form-field textarea { resize: none; min-height: 120px; }
   .form-submit { grid-column: span 2; background: var(--red); border: none; padding: 22px; font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--white); cursor: pointer; transition: background 0.25s; }
   .form-submit:hover { background: #b8360a; }
   .form-submit:disabled { background: var(--void-lifted); cursor: not-allowed; }
@@ -120,21 +119,18 @@
   <div class="section-label reveal">Book a Session</div>
   <p class="booking-intro reveal">Tell us about your project and we'll get back within 24 hours with a tailored proposal.</p>
 
-  <form 
-    class="booking-form reveal" 
-    id="booking-form"
-  >
+  <form class="booking-form reveal" id="booking-form">
     <div class="form-field">
-      <input type="text" name="name" id="user-name" placeholder="Your Name" required>
+      <input type="text" id="name" name="name" placeholder="Your Name" required>
     </div>
     <div class="form-field">
-      <input type="email" name="email" id="user-email" placeholder="Email Address" required>
+      <input type="email" id="email" name="email" placeholder="Email Address" required>
     </div>
     <div class="form-field">
-      <input type="tel" name="phone" id="user-phone" placeholder="Phone / WhatsApp">
+      <input type="tel" id="phone" name="phone" placeholder="Phone / WhatsApp">
     </div>
     <div class="form-field">
-      <select name="service" id="user-service" required>
+      <select id="service" name="service" required>
         <option value="" disabled selected>Service Needed</option>
         <option value="Photography">Photography</option>
         <option value="Videography">Videography</option>
@@ -145,15 +141,12 @@
         <option value="Multiple Services">Multiple Services</option>
       </select>
     </div>
-    <div class="form-field full">
-      <textarea name="message" id="user-message" placeholder="Tell us about your project — the story, the goals, the vision..." required></textarea>
-    </div>
     
-    <button type="submit" id="submit-btn" class="form-submit">Send Enquiry →</button>
+    <button type="submit" id="submit-btn" class="form-submit">Send Enquiry via WhatsApp →</button>
   </form>
 
   <div id="form-success">
-    <p style="font-family: var(--serif); font-size: 22px; font-style: italic; color: var(--white);">Redirecting to WhatsApp...</p>
+    <p style="font-family: var(--serif); font-size: 22px; font-style: italic; color: var(--white);">Opening WhatsApp...</p>
   </div>
 
   <div class="or-divider reveal">
@@ -189,40 +182,35 @@
     menuToggle.querySelector('i').classList.toggle('fa-times');
   });
 
-  // WhatsApp Send Logic
+  // WhatsApp Redirect Logic
   const form = document.getElementById('booking-form');
   const button = document.getElementById('submit-btn');
   const successMsg = document.getElementById('form-success');
 
   form.addEventListener("submit", (event) => {
-    event.preventDefault(); // Stop page from refreshing
+    event.preventDefault();
     
-    // 1. Collect form data
-    const name = document.getElementById('user-name').value;
-    const email = document.getElementById('user-email').value;
-    const phone = document.getElementById('user-phone').value || "Not provided";
-    const service = document.getElementById('user-service').value;
-    const message = document.getElementById('user-message').value;
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value || "Not provided";
+    const service = document.getElementById('service').value;
 
-    // 2. Format the message for WhatsApp
-    // Using * for bold text and %0A for line breaks
     const whatsappNumber = "254705214338";
-    const text = `*New Booking Enquiry — Arty Visuals*%0A%0A` +
-                 `*Client:* ${name}%0A` +
-                 `*Email:* ${email}%0A` +
-                 `*Phone:* ${phone}%0A` +
-                 `*Service:* ${service}%0A%0A` +
-                 `*Project Details:*%0A${message}`;
 
-    // 3. Construct the WhatsApp URL
-    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${text}`;
+    // Structured message without project details
+    const whatsappMessage = `*New Booking Enquiry — Arty Visuals*%0A%0A` +
+                            `*Client Name:* ${name}%0A` +
+                            `*Email Address:* ${email}%0A` +
+                            `*WhatsApp/Phone:* ${phone}%0A` +
+                            `*Interested In:* ${service}`;
 
-    // 4. Update UI feedback
+    button.disabled = true;
+    button.textContent = "Redirecting...";
     form.style.display = 'none';
     successMsg.style.display = 'block';
 
-    // 5. Open WhatsApp in a new tab
-    window.open(whatsappURL, '_blank');
+    const waURL = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+    window.open(waURL, '_blank');
   });
 </script>
 </body>
