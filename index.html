@@ -1062,6 +1062,96 @@
   .reveal-delay-4 { transition-delay: 0.4s; }
   .reveal-delay-5 { transition-delay: 0.5s; }
 
+
+  /* ── NAV SCROLLED ── */
+  nav.scrolled { background: rgba(13,13,13,0.98) !important; }
+
+  /* ── HAMBURGER BUTTON (hidden on desktop) ── */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    z-index: 1001;
+    background: none;
+    border: none;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .menu-toggle span {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+    transform-origin: center;
+  }
+  .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── MOBILE OVERLAY (hidden on desktop) ── */
+  .mobile-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(13,13,13,0.97);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .mobile-overlay.open { opacity: 1; pointer-events: all; }
+  .mobile-overlay a {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--white70);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .mobile-overlay a:hover,
+  .mobile-overlay a:active { color: var(--white); }
+  .mobile-overlay .mobile-cta {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red) !important;
+    border: 1px solid var(--red);
+    padding: 14px 36px;
+    margin-top: 8px;
+    transition: background 0.25s;
+  }
+  .mobile-overlay .mobile-cta:hover,
+  .mobile-overlay .mobile-cta:active { background: var(--red); color: var(--white) !important; }
+  .mobile-socials { display: flex; gap: 28px; margin-top: 8px; }
+  .mobile-socials a {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white40);
+    text-decoration: none;
+  }
+
   /* ── MOBILE ── */
   @media (max-width: 900px) {
     nav { padding: 20px 24px; }
@@ -1093,89 +1183,6 @@
     footer { flex-direction: column; gap: 20px; text-align: center; padding: 40px 24px; }
     .section-header { flex-direction: column; gap: 12px; }
   }
-
-  /* ── HAMBURGER ── */
-  .menu-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    position: relative;
-    z-index: 1001;
-    background: none;
-    border: none;
-    padding: 0;
-  }
-  .menu-toggle span {
-    display: block;
-    width: 24px;
-    height: 1.5px;
-    background: var(--white);
-    transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
-    transform-origin: center;
-  }
-  .menu-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-  .menu-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-  .menu-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-  /* ── MOBILE OVERLAY MENU ── */
-  .mobile-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 999;
-    background: rgba(13,13,13,0.97);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 36px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.35s ease;
-    backdrop-filter: blur(12px);
-  }
-  .mobile-overlay.open { opacity: 1; pointer-events: all; }
-  .mobile-overlay a {
-    font-family: var(--serif);
-    font-size: 32px;
-    font-weight: 300;
-    font-style: italic;
-    color: var(--white70);
-    text-decoration: none;
-    letter-spacing: 0.04em;
-    transition: color 0.2s;
-  }
-  .mobile-overlay a:hover { color: var(--white); }
-  .mobile-overlay .mobile-cta {
-    font-family: var(--sans);
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--red) !important;
-    border: 1px solid var(--red);
-    padding: 14px 32px;
-    margin-top: 12px;
-  }
-  .mobile-overlay .mobile-cta:hover { background: var(--red); color: var(--white) !important; }
-  .mobile-socials { display: flex; gap: 24px; margin-top: 16px; }
-  .mobile-socials a {
-    font-family: var(--sans);
-    font-size: 11px;
-    font-style: normal;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--white40);
-  }
-
-  /* ── NAV SCROLLED STATE ── */
-  nav.scrolled { background: rgba(13,13,13,0.98) !important; }
 
 </style>
 </head>
