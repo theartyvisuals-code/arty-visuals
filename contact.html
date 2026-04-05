@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Arty Visuals</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -27,6 +28,8 @@
   .nav-links a:hover, .nav-links a.active { color: var(--white); }
   .nav-cta { font-size: 11px !important; font-weight: 700 !important; letter-spacing: 0.18em !important; color: var(--red) !important; border: 1px solid var(--red); padding: 10px 22px; transition: all 0.25s !important; }
   .nav-cta:hover { background: var(--red) !important; color: var(--white) !important; }
+  .menu-toggle { display: none; cursor: pointer; z-index: 101; }
+  .menu-toggle i { font-size: 24px; color: var(--white); }
   section { position: relative; }
   .btn-primary { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--void); background: var(--white); border: none; padding: 16px 36px; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.25s; }
   .btn-primary:hover { background: var(--ember); transform: translateY(-1px); }
@@ -145,8 +148,8 @@
 
 <nav>
   <a href="index.html" class="nav-logo">Arty<span>.</span>Visuals</a>
-  <div class="menu-toggle" id="mobile-menu" style="display: none; cursor: pointer; z-index: 101;">
-  <i class="fas fa-bars" style="font-size: 24px; color: var(--white);"></i>
+  <div class="menu-toggle" id="mobile-menu">
+  <i class="fas fa-bars"></i>
 </div>
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
@@ -179,7 +182,7 @@
     <div class="contact-detail reveal reveal-delay-2">
       <div class="contact-detail-label">Email</div>
       <div class="contact-detail-value">
-        <a href="mailto:info@artyvisuals.co.ke">info@artyvisuals.co.ke</a>
+        <a href="/cdn-cgi/l/email-protection#0f666169604f6e7d7b7679667c7a6e637c216c6021646a"><span class="__cf_email__" data-cfemail="066f686069466774727f706f7573676a75286569286d63">[email&#160;protected]</span></a>
       </div>
     </div>
     <div class="contact-detail reveal reveal-delay-3">
@@ -224,7 +227,7 @@
   <div class="footer-copy">© 2025 Arty Visuals · Ian Kibet · Nairobi, Kenya</div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
@@ -239,15 +242,4 @@
     // Change icon between bars and times (X)
     const icon = menuToggle.querySelector('i');
     icon.classList.toggle('fa-bars');
-    icon.classList.toggle('fa-times');
-  });
-
-  // Close menu when a link is clicked
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('active');
-    });
-  });
-</script>
-</body>
-</html>
+    icon.classList.toggl

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About — Arty Visuals</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -27,6 +28,8 @@
   .nav-links a:hover, .nav-links a.active { color: var(--white); }
   .nav-cta { font-size: 11px !important; font-weight: 700 !important; letter-spacing: 0.18em !important; color: var(--red) !important; border: 1px solid var(--red); padding: 10px 22px; transition: all 0.25s !important; }
   .nav-cta:hover { background: var(--red) !important; color: var(--white) !important; }
+  .menu-toggle { display: none; cursor: pointer; z-index: 101; }
+  .menu-toggle i { font-size: 24px; color: var(--white); }
   section { position: relative; }
   .btn-primary { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--void); background: var(--white); border: none; padding: 16px 36px; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.25s; }
   .btn-primary:hover { background: var(--ember); transform: translateY(-1px); }
@@ -156,8 +159,8 @@
 
 <nav>
   <a href="index.html" class="nav-logo">Arty<span>.</span>Visuals</a>
-  <div class="menu-toggle" id="mobile-menu" style="display: none; cursor: pointer; z-index: 101;">
-  <i class="fas fa-bars" style="font-size: 24px; color: var(--white);"></i>
+  <div class="menu-toggle" id="mobile-menu">
+  <i class="fas fa-bars"></i>
 </div>
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
@@ -250,8 +253,8 @@
     <a href="https://wa.me/254705214338" target="_blank" style="color: var(--white70); text-decoration: none;">
       WhatsApp: 0705214338 — Click to redirect for instant booking.
     </a>
-    <a href="mailto:theartyvisuals@gmail.com" style="color: var(--white70); text-decoration: none;">
-      Email: theartyvisuals@gmail.com
+    <a href="/cdn-cgi/l/email-protection#196d717c786b6d606f706a6c78756a597e74787075377a7674" style="color: var(--white70); text-decoration: none;">
+      Email: <span class="__cf_email__" data-cfemail="e2968a878390969b948b9197838e91a2858f838b8ecc818d8f">[email&#160;protected]</span>
     </a>
     <div style="display: flex; justify-content: center; gap: 20px; margin-top: 10px;">
       <a href="https://instagram.com/artyv.isuals" target="_blank" style="color: var(--white70); text-decoration: none;">Instagram</a>
@@ -263,7 +266,7 @@
   <div class="footer-copy">© 2025 Arty Visuals · Ian Kibet · Nairobi, Kenya</div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
@@ -278,15 +281,4 @@
     // Change icon between bars and times (X)
     const icon = menuToggle.querySelector('i');
     icon.classList.toggle('fa-bars');
-    icon.classList.toggle('fa-times');
-  });
-
-  // Close menu when a link is clicked
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('active');
-    });
-  });
-</script>
-</body>
-</html>
+    icon.classList.t

@@ -28,6 +28,8 @@
   .nav-links a:hover, .nav-links a.active { color: var(--white); }
   .nav-cta { font-size: 11px !important; font-weight: 700 !important; letter-spacing: 0.18em !important; color: var(--red) !important; border: 1px solid var(--red); padding: 10px 22px; transition: all 0.25s !important; }
   .nav-cta:hover { background: var(--red) !important; color: var(--white) !important; }
+  .menu-toggle { display: none; cursor: pointer; z-index: 101; }
+  .menu-toggle i { font-size: 24px; color: var(--white); }
   section { position: relative; }
   .btn-primary { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--void); background: var(--white); border: none; padding: 16px 36px; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.25s; }
   .btn-primary:hover { background: var(--ember); transform: translateY(-1px); }
@@ -154,8 +156,8 @@
 
 <nav>
   <a href="index.html" class="nav-logo">Arty<span>.</span>Visuals</a>
-  <div class="menu-toggle" id="mobile-menu" style="display: none; cursor: pointer; z-index: 101;">
-  <i class="fas fa-bars" style="font-size: 24px; color: var(--white);"></i>
+  <div class="menu-toggle" id="mobile-menu">
+  <i class="fas fa-bars"></i>
 </div>
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
@@ -220,14 +222,14 @@
     </a>
 
     <div style="display: flex; gap: 30px; align-items: center; justify-content: center; flex-wrap: wrap;">
-      <a href="mailto:theartyvisuals@gmail.com" title="Email" style="color: var(--white70); text-decoration: none; font-size: 1.3rem; transition: 0.3s;"><i class="fas fa-envelope"></i></a>
+      <a href="/cdn-cgi/l/email-protection#413529242033353837283234202d3201262c20282d6f222e2c" title="Email" style="color: var(--white70); text-decoration: none; font-size: 1.3rem; transition: 0.3s;"><i class="fas fa-envelope"></i></a>
       <a href="https://instagram.com/artyv.isuals" target="_blank" title="Instagram" style="color: var(--white70); text-decoration: none; font-size: 1.3rem; transition: 0.3s;"><i class="fab fa-instagram"></i></a>
       <a href="https://www.facebook.com/profile.php?id=61576486607504" target="_blank" title="Facebook" style="color: var(--white70); text-decoration: none; font-size: 1.3rem; transition: 0.3s;"><i class="fab fa-facebook-f"></i></a>
       <a href="https://tiktok.com/@arty_visuals" target="_blank" title="TikTok" style="color: var(--white70); text-decoration: none; font-size: 1.3rem; transition: 0.3s;"><i class="fab fa-tiktok"></i></a>
     </div>
 
     <div style="display: flex; flex-direction: column; gap: 5px; font-size: 11px; color: var(--white40); letter-spacing: 0.15em; text-transform: uppercase;">
-      <span>theartyvisuals@gmail.com</span>
+      <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0d7965686c7f79747b647e786c617e4d6a606c6461236e6260">[email&#160;protected]</a></span>
       <span>@artyv.isuals • @arty_visuals</span>
     </div>
   </div>
@@ -237,7 +239,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
@@ -251,16 +253,4 @@
     navLinks.classList.toggle('active');
     // Change icon between bars and times (X)
     const icon = menuToggle.querySelector('i');
-    icon.classList.toggle('fa-bars');
-    icon.classList.toggle('fa-times');
-  });
-
-  // Close menu when a link is clicked
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('active');
-    });
-  });
-</script>
-</body>
-</html>
+    icon.classList.toggle('fa
