@@ -50,6 +50,16 @@
   .wide .portfolio-media { aspect-ratio: 16/9; }
   .tall .portfolio-media { aspect-ratio: 4/7; }
 
+  /* PLACEHOLDER CARDS (used when no image is present) */
+  .portfolio-placeholder { width: 100%; aspect-ratio: 4/5; display: flex; flex-direction: column; justify-content: flex-end; padding: 28px; position: relative; overflow: hidden; }
+  .wide .portfolio-placeholder { aspect-ratio: 16/9; }
+  .tall .portfolio-placeholder { aspect-ratio: 4/7; }
+  .portfolio-placeholder .ph-bg { position: absolute; inset: 0; }
+  .portfolio-placeholder .ph-num { position: absolute; top: 28px; right: 28px; font-family: var(--serif); font-size: 80px; font-weight: 300; font-style: italic; color: rgba(255,255,255,0.05); line-height: 1; user-select: none; }
+  .portfolio-placeholder .ph-cat { font-size: 9px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; margin-bottom: 10px; }
+  .portfolio-placeholder .ph-title { font-family: var(--serif); font-size: 22px; font-weight: 300; color: var(--white); line-height: 1.2; }
+  .portfolio-placeholder .ph-sub { font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 6px; letter-spacing: 0.06em; }
+
   /* FOOTER */
   footer { padding: 80px 60px; border-top: 1px solid var(--white08); text-align: center; background: var(--void); }
   .footer-logo { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--white70); margin-bottom: 10px; }
@@ -111,18 +121,106 @@
 </section>
 
 <div class="portfolio-grid">
+
+  <!-- 1. Photography – wide hero -->
   <div class="portfolio-item wide" data-cat="photography">
-    <img src="images/photography-1.jpg" alt="Photography" class="portfolio-media">
+    <div class="portfolio-placeholder">
+      <div class="ph-bg" style="background: radial-gradient(ellipse 80% 80% at 60% 40%, rgba(212,66,10,0.22) 0%, rgba(13,13,13,0.9) 70%), linear-gradient(135deg, #1a0a06 0%, #0d0d0d 100%);"></div>
+      <div class="ph-num">01</div>
+      <div class="ph-cat" style="color: var(--red);">Photography</div>
+      <div class="ph-title">Golden Hour<br>Portrait Series</div>
+      <div class="ph-sub">Editorial · Nairobi, 2025</div>
+    </div>
   </div>
+
+  <!-- 2. Branding -->
   <div class="portfolio-item" data-cat="branding">
-    <img src="images/branding-1.jpg" alt="Branding" class="portfolio-media">
+    <div class="portfolio-placeholder">
+      <div class="ph-bg" style="background: radial-gradient(ellipse 70% 70% at 30% 60%, rgba(90,10,212,0.25) 0%, rgba(13,13,13,0.95) 70%), linear-gradient(160deg, #0a0612 0%, #0d0d0d 100%);"></div>
+      <div class="ph-num">02</div>
+      <div class="ph-cat" style="color: var(--violet);">Brand Identity</div>
+      <div class="ph-title">Amara<br>Skincare Co.</div>
+      <div class="ph-sub">Logo · Typography · Guidelines</div>
+    </div>
   </div>
+
+  <!-- 3. Film – tall -->
   <div class="portfolio-item tall" data-cat="film">
-    <img src="images/film-1.jpg" alt="Film" class="portfolio-media">
+    <div class="portfolio-placeholder">
+      <div class="ph-bg" style="background: radial-gradient(ellipse 60% 80% at 50% 30%, rgba(10,122,90,0.2) 0%, rgba(13,13,13,0.95) 65%), linear-gradient(180deg, #060f0b 0%, #0d0d0d 100%);"></div>
+      <div class="ph-num">03</div>
+      <div class="ph-cat" style="color: var(--teal);">Film & Motion</div>
+      <div class="ph-title">Roots &<br>Routes</div>
+      <div class="ph-sub">Short Film · Cinematography</div>
+    </div>
   </div>
+
+  <!-- 4. Design -->
   <div class="portfolio-item" data-cat="design">
-    <img src="images/design-1.jpg" alt="Design" class="portfolio-media">
+    <div class="portfolio-placeholder">
+      <div class="ph-bg" style="background: radial-gradient(ellipse 80% 60% at 50% 80%, rgba(212,66,10,0.18) 0%, rgba(13,13,13,0.95) 65%), linear-gradient(200deg, #0d0d0d 0%, #1a0a06 100%);"></div>
+      <div class="ph-num">04</div>
+      <div class="ph-cat" style="color: var(--red);">Print & Design</div>
+      <div class="ph-title">Harvest<br>Festival Poster</div>
+      <div class="ph-sub">Large Format · Event Print</div>
+    </div>
   </div>
+
+  <!-- 5. Photography -->
+  <div class="portfolio-item" data-cat="photography">
+    <div class="portfolio-placeholder">
+      <div class="ph-bg" style="background: radial-gradient(ellipse 70% 70% at 40% 40%, rgba(212,66,10,0.2) 0%, rgba(13,13,13,0.95) 65%), linear-gradient(120deg, #120602 0%, #0d0d0d 100%);"></div>
+      <div class="ph-num">05</div>
+      <div class="ph-cat" style="color: var(--red);">Photography</div>
+      <div class="ph-title">Mombasa<br>Street Series</div>
+      <div class="ph-sub">Documentary · Street Photography</div>
+    </div>
+  </div>
+
+  <!-- 6. Branding – wide -->
+  <div class="portfolio-item wide" data-cat="branding">
+    <div class="portfolio-placeholder">
+      <div class="ph-bg" style="background: radial-gradient(ellipse 70% 90% at 70% 50%, rgba(90,10,212,0.2) 0%, rgba(13,13,13,0.95) 65%), linear-gradient(100deg, #0d0d0d 0%, #080412 100%);"></div>
+      <div class="ph-num">06</div>
+      <div class="ph-cat" style="color: var(--violet);">Brand Identity</div>
+      <div class="ph-title">Kazi Collective — Full Brand System</div>
+      <div class="ph-sub">Identity · Colour · Digital & Print Assets</div>
+    </div>
+  </div>
+
+  <!-- 7. Film -->
+  <div class="portfolio-item" data-cat="film">
+    <div class="portfolio-placeholder">
+      <div class="ph-bg" style="background: radial-gradient(ellipse 70% 70% at 50% 60%, rgba(10,122,90,0.22) 0%, rgba(13,13,13,0.95) 65%), linear-gradient(160deg, #0d0d0d 0%, #04100c 100%);"></div>
+      <div class="ph-num">07</div>
+      <div class="ph-cat" style="color: var(--teal);">Film & Motion</div>
+      <div class="ph-title">Afrobeats<br>Music Video</div>
+      <div class="ph-sub">Videography · Colour Grade</div>
+    </div>
+  </div>
+
+  <!-- 8. Design -->
+  <div class="portfolio-item" data-cat="design">
+    <div class="portfolio-placeholder">
+      <div class="ph-bg" style="background: radial-gradient(ellipse 60% 70% at 60% 30%, rgba(212,66,10,0.16) 0%, rgba(90,10,212,0.1) 50%, rgba(13,13,13,0.95) 70%), linear-gradient(180deg, #0d0d0d 0%, #0d0d0d 100%);"></div>
+      <div class="ph-num">08</div>
+      <div class="ph-cat" style="color: var(--red);">Print & Design</div>
+      <div class="ph-title">Social Media<br>Campaign Kit</div>
+      <div class="ph-sub">Graphic Design · Digital Assets</div>
+    </div>
+  </div>
+
+  <!-- 9. Photography -->
+  <div class="portfolio-item" data-cat="photography">
+    <div class="portfolio-placeholder">
+      <div class="ph-bg" style="background: radial-gradient(ellipse 75% 60% at 40% 70%, rgba(212,66,10,0.2) 0%, rgba(13,13,13,0.95) 65%), linear-gradient(220deg, #120602 0%, #0d0d0d 100%);"></div>
+      <div class="ph-num">09</div>
+      <div class="ph-cat" style="color: var(--red);">Photography</div>
+      <div class="ph-title">Corporate<br>Headshots</div>
+      <div class="ph-sub">Portrait · Studio · Nairobi</div>
+    </div>
+  </div>
+
 </div>
 
 <footer>
@@ -146,7 +244,8 @@
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     document.querySelectorAll('.portfolio-item').forEach(item => {
-      item.style.display = (cat === 'all' || item.dataset.cat === cat) ? 'block' : 'none';
+      const show = cat === 'all' || item.dataset.cat === cat;
+      item.style.display = show ? '' : 'none';
     });
   }
 </script>

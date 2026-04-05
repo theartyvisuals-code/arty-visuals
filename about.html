@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About — Arty Visuals</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -94,64 +94,29 @@
     .values-section { padding: 80px 24px; }
     .values-grid { grid-template-columns: 1fr; }
     footer { flex-direction: column; gap: 20px; text-align: center; padding: 40px 24px; }
-    @media (max-width: 768px) {
-  /* Navigation Adjustments */
-  nav {
-    padding: 15px 25px;
   }
-  
-  .menu-toggle {
-    display: block !important;
-  }
-
-  .nav-links {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 80%;
-    height: 100vh;
-    background: var(--void-mid);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-    transition: 0.4s ease-in-out;
-    backdrop-filter: blur(10px);
-    border-left: 1px solid var(--white08);
-  }
-
-  .nav-links.active {
-    right: 0;
-  }
-
-  /* Layout Spacing */
-  .hero, .page-hero, .work-section, section, footer {
-    padding: 80px 25px 40px !important;
-  }
-
-  .page-hero-title {
-    font-size: 45px !important;
-  }
-
-  /* Grid Stacking */
-  .portfolio-grid {
-    grid-template-columns: 1fr !important; /* Stack work items vertically */
-  }
-
-  .portfolio-item, .portfolio-item.wide, .portfolio-item.tall {
-    grid-column: span 1 !important;
-    aspect-ratio: 1/1 !important;
-  }
-
-  /* Services & Booking Form */
-  .services-grid, .process-grid {
-    grid-template-columns: 1fr !important;
-  }
-
-  .booking-container {
-    padding: 20px !important;
-  }
-}
+  @media (max-width: 768px) {
+    .menu-toggle { display: block; }
+    .nav-links {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      height: 100vh;
+      background: var(--void-mid);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      transition: 0.4s ease-in-out;
+      backdrop-filter: blur(10px);
+      border-left: 1px solid var(--white08);
+      z-index: 100;
+    }
+    .nav-links.active { right: 0; }
+    .page-hero-title { font-size: 45px !important; }
+    .services-grid, .process-grid { grid-template-columns: 1fr !important; }
+    .booking-form { grid-template-columns: 1fr !important; }
   }
 </style>
 </head>
@@ -253,8 +218,8 @@
     <a href="https://wa.me/254705214338" target="_blank" style="color: var(--white70); text-decoration: none;">
       WhatsApp: 0705214338 — Click to redirect for instant booking.
     </a>
-    <a href="/cdn-cgi/l/email-protection#196d717c786b6d606f706a6c78756a597e74787075377a7674" style="color: var(--white70); text-decoration: none;">
-      Email: <span class="__cf_email__" data-cfemail="e2968a878390969b948b9197838e91a2858f838b8ecc818d8f">[email&#160;protected]</span>
+    <a href="/cdn-cgi/l/email-protection#1c6874797d6e68656a756f697d706f5c7b717d7570327f7371" style="color: var(--white70); text-decoration: none;">
+      Email: <span class="__cf_email__" data-cfemail="5d2935383c2f29242b342e283c312e1d3a303c3431733e3230">[email&#160;protected]</span>
     </a>
     <div style="display: flex; justify-content: center; gap: 20px; margin-top: 10px;">
       <a href="https://instagram.com/artyv.isuals" target="_blank" style="color: var(--white70); text-decoration: none;">Instagram</a>
