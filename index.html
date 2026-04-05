@@ -4,168 +4,1231 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Arty Visuals — Honest Art.</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --void: #0D0D0D; --void-soft: #141414; --void-mid: #1A1A1A; --void-lifted: #222222;
-    --red: #D4420A; --red-glow: rgba(212,66,10,0.15);
-    --teal: #0A7A5A; --teal-glow: rgba(10,122,90,0.12);
+    --void: #0D0D0D;
+    --void-soft: #141414;
+    --void-mid: #1A1A1A;
+    --void-lifted: #222222;
+    --red: #D4420A;
+    --red-glow: rgba(212,66,10,0.15);
+    --teal: #0A7A5A;
+    --teal-glow: rgba(10,122,90,0.12);
     --violet: #5A0AD4;
-    --ember: #FDE8E0; --mist: #E0F5EE; --dusk: #EDE0FD; --canvas: #F7F5F2;
-    --white: #ffffff; --white70: rgba(255,255,255,0.7); --white40: rgba(255,255,255,0.4);
-    --white15: rgba(255,255,255,0.15); --white08: rgba(255,255,255,0.08); --white04: rgba(255,255,255,0.04);
-    --serif: 'Cormorant Garamond', Georgia, serif; --sans: 'Syne', sans-serif;
+    --ember: #FDE8E0;
+    --mist: #E0F5EE;
+    --dusk: #EDE0FD;
+    --canvas: #F7F5F2;
+    --white: #ffffff;
+    --white70: rgba(255,255,255,0.7);
+    --white40: rgba(255,255,255,0.4);
+    --white15: rgba(255,255,255,0.15);
+    --white08: rgba(255,255,255,0.08);
+    --white04: rgba(255,255,255,0.04);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Syne', sans-serif;
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--void); color: var(--white); font-family: var(--sans); font-weight: 400; line-height: 1.6; overflow-x: hidden; }
-  body::before {
-    content: ''; position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 0; opacity: 0.6;
-  }
-  /* NAV */
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 24px 60px; display: flex; align-items: center; justify-content: space-between; background: linear-gradient(180deg, rgba(13,13,13,0.95) 0%, transparent 100%); backdrop-filter: blur(2px); }
-  .nav-logo { font-family: var(--serif); font-size: 22px; font-weight: 600; letter-spacing: 0.04em; color: var(--white); text-decoration: none; }
-  .nav-logo span { color: var(--red); }
-  .nav-links { display: flex; gap: 40px; list-style: none; }
-  .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white70); text-decoration: none; transition: color 0.2s; }
-  .nav-links a:hover, .nav-links a.active { color: var(--white); }
-  .nav-cta { font-size: 11px !important; font-weight: 700 !important; letter-spacing: 0.18em !important; color: var(--red) !important; border: 1px solid var(--red); padding: 10px 22px; transition: all 0.25s !important; }
-  .nav-cta:hover { background: var(--red) !important; color: var(--white) !important; }
-  
-  .menu-toggle { display: none; cursor: pointer; z-index: 101; }
-  .menu-toggle i { font-size: 24px; color: var(--white); }
 
-  /* HERO */
-  .hero { min-height: 100vh; display: flex; align-items: center; padding: 0 60px; overflow: hidden; }
-  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 60% at 70% 50%, rgba(212,66,10,0.08) 0%, transparent 60%), radial-gradient(ellipse 40% 50% at 20% 80%, rgba(10,122,90,0.06) 0%, transparent 55%), radial-gradient(ellipse 30% 40% at 80% 20%, rgba(90,10,212,0.07) 0%, transparent 50%); }
-  .hero-grid-lines { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 80px 80px; mask-image: radial-gradient(ellipse 70% 70% at center, black, transparent); }
-  .hero-content { position: relative; z-index: 2; max-width: 900px; }
-  .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal); margin-bottom: 32px; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
-  .hero-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--teal); }
-  .hero-headline { font-family: var(--serif); font-size: clamp(64px, 8vw, 110px); font-weight: 300; line-height: 1.0; letter-spacing: -0.01em; color: var(--white); opacity: 0; animation: fadeUp 0.9s 0.35s forwards; }
-  .hero-headline em { font-style: italic; color: var(--red); }
-  .hero-sub { font-size: 15px; font-weight: 400; color: var(--white40); letter-spacing: 0.06em; margin-top: 28px; max-width: 480px; line-height: 1.7; opacity: 0; animation: fadeUp 0.9s 0.5s forwards; }
-  .hero-actions { display: flex; align-items: center; gap: 28px; margin-top: 48px; opacity: 0; animation: fadeUp 0.9s 0.65s forwards; }
-  .btn-primary { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--void); background: var(--white); border: none; padding: 16px 36px; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.25s; }
-  .btn-primary:hover { background: var(--ember); transform: translateY(-1px); }
-  .btn-ghost { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white70); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
-  .btn-ghost::after { content: '→'; transition: transform 0.2s; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--white);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(180deg, rgba(13,13,13,0.95) 0%, transparent 100%);
+    backdrop-filter: blur(2px);
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .nav-logo span {
+    color: var(--red);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white70);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red) !important;
+    border: 1px solid var(--red);
+    padding: 10px 22px;
+    transition: all 0.25s !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--red) !important;
+    color: var(--white) !important;
+  }
+
+  /* ── SECTIONS ── */
+  section { position: relative; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 60px;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 70% 50%, rgba(212,66,10,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 50% at 20% 80%, rgba(10,122,90,0.06) 0%, transparent 55%),
+      radial-gradient(ellipse 30% 40% at 80% 20%, rgba(90,10,212,0.07) 0%, transparent 50%);
+  }
+
+  .hero-grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 70% 70% at center, black, transparent);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--teal);
+  }
+
+  .hero-headline {
+    font-family: var(--serif);
+    font-size: clamp(64px, 8vw, 110px);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    opacity: 0;
+    animation: fadeUp 0.9s 0.35s forwards;
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: var(--red);
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--white40);
+    letter-spacing: 0.06em;
+    margin-top: 28px;
+    max-width: 480px;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-top: 48px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.65s forwards;
+  }
+
+  .btn-primary {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--void);
+    background: var(--white);
+    border: none;
+    padding: 16px 36px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.25s;
+  }
+
+  .btn-primary:hover {
+    background: var(--ember);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white70);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .btn-ghost::after {
+    content: '→';
+    transition: transform 0.2s;
+  }
+
   .btn-ghost:hover { color: var(--white); }
   .btn-ghost:hover::after { transform: translateX(4px); }
-  .hero-scroll { position: absolute; bottom: 40px; left: 60px; display: flex; align-items: center; gap: 12px; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white40); opacity: 0; animation: fadeIn 1s 1.2s forwards; }
-  .hero-scroll::before { content: ''; width: 1px; height: 40px; background: linear-gradient(to bottom, transparent, var(--white40)); animation: scrollLine 2s 1.5s ease-in-out infinite; }
-  /* SERVICES STRIP */
-  .services-strip { padding: 40px 60px; border-top: 1px solid var(--white08); border-bottom: 1px solid var(--white08); display: flex; gap: 0; overflow: hidden; }
-  .service-tag { flex: 1; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white40); padding: 0 40px 0 0; border-right: 1px solid var(--white08); transition: color 0.2s; cursor: default; }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 60px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white40);
+    opacity: 0;
+    animation: fadeIn 1s 1.2s forwards;
+  }
+
+  .hero-scroll::before {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, var(--white40));
+    animation: scrollLine 2s 1.5s ease-in-out infinite;
+  }
+
+  /* ── SERVICES STRIP ── */
+  .services-strip {
+    padding: 40px 60px;
+    border-top: 1px solid var(--white08);
+    border-bottom: 1px solid var(--white08);
+    display: flex;
+    gap: 0;
+    overflow: hidden;
+  }
+
+  .service-tag {
+    flex: 1;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white40);
+    padding: 0 40px 0 0;
+    border-right: 1px solid var(--white08);
+    transition: color 0.2s;
+    cursor: default;
+  }
+
   .service-tag:first-child { padding-left: 0; }
   .service-tag:last-child { border-right: none; }
   .service-tag:hover { color: var(--white); }
-  /* QUICK INTRO */
-  .quick-intro { padding: 120px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
-  .qi-label { font-size: 10px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--teal); margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
-  .qi-label::after { content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--teal); }
-  .qi-headline { font-family: var(--serif); font-size: clamp(40px, 4vw, 60px); font-weight: 300; line-height: 1.15; color: var(--white); margin-bottom: 28px; }
-  .qi-headline em { font-style: italic; color: var(--red); }
-  .qi-body { font-size: 15px; color: var(--white70); line-height: 1.85; margin-bottom: 16px; }
-  .pillars-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
-  .pillar { background: var(--void-mid); padding: 32px 28px; transition: background 0.25s; cursor: default; }
+
+  /* ── ABOUT ── */
+  .about {
+    padding: 160px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 120px;
+    align-items: center;
+  }
+
+  .about-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .about-label::after {
+    content: '';
+    flex: 1;
+    max-width: 40px;
+    height: 1px;
+    background: var(--teal);
+  }
+
+  .about-headline {
+    font-family: var(--serif);
+    font-size: clamp(40px, 4vw, 60px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 28px;
+  }
+
+  .about-headline em {
+    font-style: italic;
+    color: var(--red);
+  }
+
+  .about-body {
+    font-size: 15px;
+    color: var(--white70);
+    line-height: 1.85;
+    margin-bottom: 16px;
+  }
+
+  .about-quote {
+    margin-top: 48px;
+    padding: 28px 32px;
+    border-left: 2px solid var(--red);
+    background: var(--white04);
+  }
+
+  .about-quote p {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .about-quote cite {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white40);
+    font-style: normal;
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .pillar {
+    background: var(--void-mid);
+    padding: 32px 28px;
+    transition: background 0.25s;
+    cursor: default;
+  }
+
   .pillar:hover { background: var(--void-lifted); }
-  .pillar-num { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; color: var(--red); margin-bottom: 10px; }
-  .pillar-name { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--white); margin-bottom: 8px; }
-  .pillar-desc { font-size: 12px; color: var(--white40); line-height: 1.7; }
-  /* STATS */
-  .stats-section { padding: 100px 60px; background: var(--void-mid); display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background-color: var(--white08); }
-  .stat-block { background: var(--void-mid); padding: 56px 40px; text-align: center; }
-  .stat-number { font-family: var(--serif); font-size: 64px; font-weight: 300; color: var(--white); line-height: 1; margin-bottom: 12px; }
+
+  .pillar-num {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--red);
+    margin-bottom: 10px;
+  }
+
+  .pillar-name {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .pillar-desc {
+    font-size: 12px;
+    color: var(--white40);
+    line-height: 1.7;
+  }
+
+  /* ── SERVICES ── */
+  .services-section {
+    padding: 120px 60px;
+    background: var(--void-soft);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 80px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--violet);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.15;
+  }
+
+  .section-title em { font-style: italic; color: var(--red); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--white08);
+  }
+
+  .service-card {
+    background: var(--void-soft);
+    padding: 48px 36px;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--red);
+    transition: width 0.35s ease;
+  }
+
+  .service-card:hover { background: var(--void-mid); }
+  .service-card:hover::after { width: 100%; }
+
+  .service-icon {
+    font-family: var(--serif);
+    font-size: 48px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--white15);
+    margin-bottom: 28px;
+    line-height: 1;
+  }
+
+  .service-name {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+
+  .service-desc {
+    font-size: 14px;
+    color: var(--white40);
+    line-height: 1.75;
+  }
+
+  /* ── WORK / PORTFOLIO ── */
+  .work-section {
+    padding: 120px 60px;
+  }
+
+  .portfolio-filters {
+    display: flex;
+    gap: 4px;
+    margin-top: 48px;
+    margin-bottom: 60px;
+  }
+
+  .filter-btn {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white40);
+    background: none;
+    border: 1px solid var(--white15);
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn.active, .filter-btn:hover {
+    color: var(--white);
+    border-color: var(--white40);
+    background: var(--white08);
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2px;
+  }
+
+  .portfolio-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .portfolio-item:nth-child(1) { grid-column: span 7; grid-row: span 2; }
+  .portfolio-item:nth-child(2) { grid-column: span 5; }
+  .portfolio-item:nth-child(3) { grid-column: span 5; }
+  .portfolio-item:nth-child(4) { grid-column: span 4; }
+  .portfolio-item:nth-child(5) { grid-column: span 4; }
+  .portfolio-item:nth-child(6) { grid-column: span 4; }
+
+  .portfolio-placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: var(--void-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .portfolio-item:nth-child(1) .portfolio-placeholder { aspect-ratio: unset; height: 100%; min-height: 420px; }
+
+  .portfolio-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(212,66,10,0.06) 0%, rgba(90,10,212,0.06) 100%);
+  }
+
+  .portfolio-category-tag {
+    position: absolute;
+    top: 20px; left: 20px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--red);
+    padding: 5px 10px;
+  }
+
+  .portfolio-placeholder-text {
+    font-family: var(--serif);
+    font-size: 48px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--white08);
+    user-select: none;
+  }
+
+  .portfolio-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(13,13,13,0.92) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.35s;
+    display: flex;
+    align-items: flex-end;
+    padding: 28px;
+  }
+
+  .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+
+  .portfolio-overlay-content h3 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .portfolio-overlay-content p {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white40);
+  }
+
+  /* ── STATS ── */
+  .stats-section {
+    padding: 100px 60px;
+    background: var(--void-mid);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background-color: var(--white08);
+  }
+
+  .stat-block {
+    background: var(--void-mid);
+    padding: 56px 40px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: var(--serif);
+    font-size: 64px;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
   .stat-number span { color: var(--red); }
-  .stat-label { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white40); }
-  /* CTA BAND */
-  .cta-band { padding: 120px 60px; text-align: center; position: relative; overflow: hidden; }
-  .cta-band-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 70% at 50% 100%, rgba(212,66,10,0.1) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 20% 20%, rgba(90,10,212,0.07) 0%, transparent 50%); }
-  .cta-headline { font-family: var(--serif); font-size: clamp(48px, 6vw, 88px); font-weight: 300; line-height: 1.1; color: var(--white); margin: 20px auto 40px; max-width: 700px; position: relative; }
-  .cta-headline em { font-style: italic; color: var(--red); }
-  .cta-actions { display: flex; align-items: center; justify-content: center; gap: 28px; position: relative; }
-  /* FOOTER */
-  footer { padding: 48px 60px; border-top: 1px solid var(--white08); display: flex; align-items: center; justify-content: space-between; }
-  .footer-logo { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--white70); }
+
+  .stat-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white40);
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials {
+    padding: 140px 60px;
+    overflow: hidden;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 70px;
+  }
+
+  .testimonial-card {
+    background: var(--void-mid);
+    padding: 44px 36px;
+    position: relative;
+  }
+
+  .testimonial-card::before {
+    content: '"';
+    font-family: var(--serif);
+    font-size: 120px;
+    font-style: italic;
+    color: var(--white04);
+    position: absolute;
+    top: 20px; right: 24px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .testimonial-text {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--white70);
+    line-height: 1.75;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .author-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--white);
+    flex-shrink: 0;
+  }
+
+  .author-name {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--white);
+  }
+
+  .author-role {
+    font-size: 11px;
+    color: var(--white40);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── FOUNDER ── */
+  .founder-section {
+    padding: 140px 60px;
+    background: var(--void-soft);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+  }
+
+  .founder-visual {
+    position: relative;
+    aspect-ratio: 3/4;
+    background: var(--void-mid);
+    overflow: hidden;
+  }
+
+  .founder-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 70%, rgba(212,66,10,0.12) 0%, transparent 60%);
+  }
+
+  .founder-monogram {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 140px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--white08);
+    user-select: none;
+  }
+
+  .founder-placeholder-label {
+    position: absolute;
+    bottom: 32px;
+    left: 32px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white40);
+  }
+
+  .founder-frame-accent {
+    position: absolute;
+    top: -8px; right: -8px;
+    width: 60%; height: 60%;
+    border: 1px solid var(--red);
+    pointer-events: none;
+  }
+
+  .founder-copy .about-headline { font-size: clamp(36px, 3.5vw, 52px); }
+
+  /* ── BOOKING ── */
+  .booking-section {
+    padding: 120px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .booking-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 50% 70% at 50% 100%, rgba(212,66,10,0.1) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 20% 20%, rgba(90,10,212,0.07) 0%, transparent 50%);
+  }
+
+  .booking-section .section-label { text-align: center; }
+
+  .booking-headline {
+    font-family: var(--serif);
+    font-size: clamp(48px, 6vw, 88px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--white);
+    margin: 20px auto 40px;
+    max-width: 700px;
+    position: relative;
+  }
+
+  .booking-headline em { font-style: italic; color: var(--red); }
+
+  .booking-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    max-width: 700px;
+    margin: 60px auto 0;
+    background: var(--white08);
+    position: relative;
+  }
+
+  .form-field {
+    background: var(--void-soft);
+    padding: 0;
+  }
+
+  .form-field.full { grid-column: span 2; }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 24px 28px;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--white);
+    letter-spacing: 0.03em;
+    -webkit-appearance: none;
+  }
+
+  .form-field select { cursor: pointer; }
+
+  .form-field input::placeholder,
+  .form-field textarea::placeholder {
+    color: var(--white40);
+  }
+
+  .form-field select option { background: var(--void); }
+
+  .form-field textarea { resize: none; min-height: 120px; }
+
+  .form-submit {
+    grid-column: span 2;
+    background: var(--red);
+    border: none;
+    padding: 22px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--white);
+    cursor: pointer;
+    transition: background 0.25s;
+  }
+
+  .form-submit:hover { background: #b8360a; }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    padding: 120px 60px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    background: var(--void-soft);
+  }
+
+  .contact-info h2 {
+    font-family: var(--serif);
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 40px;
+    line-height: 1.2;
+  }
+
+  .contact-detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--white08);
+  }
+
+  .contact-detail:last-of-type { border-bottom: none; }
+
+  .contact-detail-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    min-width: 80px;
+    padding-top: 2px;
+  }
+
+  .contact-detail-value {
+    font-size: 15px;
+    color: var(--white70);
+    line-height: 1.6;
+  }
+
+  .contact-detail-value a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-detail-value a:hover { color: var(--white); }
+
+  .locations-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  .location-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    background: rgba(10,122,90,0.1);
+    padding: 6px 12px;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 4px;
+    margin-top: 48px;
+  }
+
+  .social-link {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--white40);
+    text-decoration: none;
+    padding: 10px 18px;
+    border: 1px solid var(--white15);
+    transition: all 0.2s;
+  }
+
+  .social-link:hover {
+    color: var(--white);
+    border-color: var(--white40);
+  }
+
+  .whatsapp-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(37,211,102,0.1);
+    border: 1px solid rgba(37,211,102,0.3);
+    padding: 16px 28px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #25d366;
+    text-decoration: none;
+    transition: all 0.25s;
+    margin-top: 40px;
+    display: block;
+    text-align: center;
+  }
+
+  .whatsapp-cta:hover {
+    background: rgba(37,211,102,0.18);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 48px 60px;
+    border-top: 1px solid var(--white08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--white70);
+  }
+
   .footer-logo span { color: var(--red); }
-  .footer-tagline { font-family: var(--serif); font-size: 14px; font-style: italic; color: var(--white40); }
-  .footer-copy { font-size: 11px; color: var(--white15); letter-spacing: 0.08em; }
-  /* ANIMATIONS */
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes scrollLine { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
-  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  
-  /* MOBILE */
+
+  .footer-tagline {
+    font-family: var(--serif);
+    font-size: 14px;
+    font-style: italic;
+    color: var(--white40);
+  }
+
+  .footer-copy {
+    font-size: 11px;
+    color: var(--white15);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes scrollLine {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* ── REVEAL ON SCROLL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+
+  /* ── MOBILE ── */
   @media (max-width: 900px) {
     nav { padding: 20px 24px; }
-    .menu-toggle { display: block; }
-    .nav-links {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 100%;
-      height: 100vh;
-      background: var(--void-mid);
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 30px;
-      transition: 0.4s ease-in-out;
-      z-index: 100;
-      backdrop-filter: blur(10px);
-    }
-    .nav-links.active { right: 0; }
+    .nav-links { display: none; }
+    .menu-toggle { display: flex; }
+    .mobile-overlay { display: flex; }
     .hero { padding: 0 24px; }
     .hero-scroll { left: 24px; }
     .services-strip { padding: 28px 24px; flex-wrap: wrap; gap: 12px; }
     .service-tag { border-right: none; padding: 0; flex: none; }
-    .quick-intro { grid-template-columns: 1fr; padding: 80px 24px; gap: 60px; }
+    .about { grid-template-columns: 1fr; padding: 80px 24px; gap: 60px; }
     .pillars-grid { grid-template-columns: 1fr; }
+    .services-section { padding: 80px 24px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .work-section { padding: 80px 24px; }
+    .portfolio-grid { grid-template-columns: 1fr 1fr; }
+    .portfolio-item:nth-child(n) { grid-column: span 1; grid-row: span 1; }
+    .portfolio-item .portfolio-placeholder { min-height: 200px !important; aspect-ratio: 4/3; }
     .stats-section { grid-template-columns: 1fr 1fr; padding: 60px 24px; }
-    .cta-band { padding: 80px 24px; }
+    .testimonials { padding: 80px 24px; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .founder-section { grid-template-columns: 1fr; padding: 80px 24px; gap: 60px; }
+    .founder-visual { aspect-ratio: 4/3; }
+    .founder-monogram { font-size: 80px; }
+    .booking-section { padding: 80px 24px; }
+    .booking-form { grid-template-columns: 1fr; }
+    .form-field.full, .form-submit { grid-column: span 1; }
+    .contact-section { grid-template-columns: 1fr; padding: 80px 24px; }
     footer { flex-direction: column; gap: 20px; text-align: center; padding: 40px 24px; }
+    .section-header { flex-direction: column; gap: 12px; }
   }
+
+  /* ── HAMBURGER ── */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1001;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+  .menu-toggle span {
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: var(--white);
+    transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+    transform-origin: center;
+  }
+  .menu-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .menu-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .menu-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  /* ── MOBILE OVERLAY MENU ── */
+  .mobile-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(13,13,13,0.97);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    backdrop-filter: blur(12px);
+  }
+  .mobile-overlay.open { opacity: 1; pointer-events: all; }
+  .mobile-overlay a {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--white70);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .mobile-overlay a:hover { color: var(--white); }
+  .mobile-overlay .mobile-cta {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red) !important;
+    border: 1px solid var(--red);
+    padding: 14px 32px;
+    margin-top: 12px;
+  }
+  .mobile-overlay .mobile-cta:hover { background: var(--red); color: var(--white) !important; }
+  .mobile-socials { display: flex; gap: 24px; margin-top: 16px; }
+  .mobile-socials a {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white40);
+  }
+
+  /* ── NAV SCROLLED STATE ── */
+  nav.scrolled { background: rgba(13,13,13,0.98) !important; }
+
 </style>
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="nav-logo">Arty<span>.</span>Visuals</a>
-  <div class="menu-toggle" id="mobile-menu">
-    <i class="fas fa-bars"></i>
-  </div>
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#home" class="nav-logo">Arty<span>.</span>Visuals</a>
+  <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
   <ul class="nav-links">
-    <li><a href="about.html">About</a></li>
-    <li><a href="services.html">Services</a></li>
-    <li><a href="work.html">Work</a></li>
-    <li><a href="founder.html">Founder</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><a href="booking.html" class="nav-cta">Book Us</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#founder">Founder</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#booking" class="nav-cta">Book Us</a></li>
   </ul>
 </nav>
 
+<!-- Mobile overlay menu -->
+<div class="mobile-overlay" id="mobile-overlay" aria-hidden="true">
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#services" class="mobile-link">Services</a>
+  <a href="#work" class="mobile-link">Work</a>
+  <a href="#founder" class="mobile-link">Founder</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+  <a href="#booking" class="mobile-link mobile-cta">Book Us</a>
+  <div class="mobile-socials">
+    <a href="https://instagram.com/artyv.isuals" target="_blank">IG</a>
+    <a href="https://wa.me/254705214338" target="_blank">WA</a>
+    <a href="https://tiktok.com/@arty_visuals" target="_blank">TK</a>
+  </div>
+</div>
+
+<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-bg"></div>
   <div class="hero-grid-lines"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Premium Creative Studio · Nairobi, Kenya</div>
-    <h1 class="hero-headline">Honest<br><em>Art.</em></h1>
+    <h1 class="hero-headline">
+      Honest<br><em>Art.</em>
+    </h1>
     <p class="hero-sub">Photography · Videography · Cinematography · Graphic Design · Brand Identity · Graphics Printing</p>
     <div class="hero-actions">
-      <a href="work.html" class="btn-primary">View Our Work</a>
-      <a href="booking.html" class="btn-ghost">Book a Session</a>
+      <a href="#work" class="btn-primary">View Our Work</a>
+      <a href="#booking" class="btn-ghost">Book a Session</a>
     </div>
   </div>
   <div class="hero-scroll">Scroll</div>
 </section>
 
+<!-- SERVICES STRIP -->
 <div class="services-strip">
   <div class="service-tag">Photography</div>
   <div class="service-tag">Videography</div>
@@ -175,14 +1238,18 @@
   <div class="service-tag">Graphics Printing</div>
 </div>
 
-<section class="quick-intro">
-  <div>
-    <div class="qi-label reveal">Our Story</div>
-    <h2 class="qi-headline reveal">Born from a contradiction.<br><em>Built on craft.</em></h2>
-    <p class="qi-body reveal">Arty Visuals was born in Nairobi from a contradiction: an agriculture student whose eyes were always on the frame, not the field. Ian Kibet carved his own path — driven by an unshakeable passion for photography, film, design and brand identity.</p>
-    <p class="qi-body reveal">Today, Arty Visuals serves creatives, artists and visionary brands across Kenya who demand work that reflects the same level of ambition they bring to their own craft.</p>
-    <div style="margin-top: 36px;" class="reveal">
-      <a href="about.html" class="btn-ghost">Read Our Story</a>
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-copy">
+    <div class="about-label reveal">Our Story</div>
+    <h2 class="about-headline reveal reveal-delay-1">
+      Born from a<br>contradiction.<br><em>Built on craft.</em>
+    </h2>
+    <p class="about-body reveal reveal-delay-2">Arty Visuals was born in Nairobi from a contradiction: an agriculture student whose eyes were always on the frame, not the field. Ian Kibet carved his own path — driven by an unshakeable passion for photography, film, design and brand identity.</p>
+    <p class="about-body reveal reveal-delay-3">Today, Arty Visuals serves creatives, artists and visionary brands across Kenya who demand work that reflects the same level of ambition they bring to their own craft. Camera to screen, concept to print, idea to identity.</p>
+    <div class="about-quote reveal reveal-delay-4">
+      <p>"Arty is not just a name. It is a standard. A promise that what you see was crafted for eyes that refuse to settle for ordinary."</p>
+      <cite>— Ian Kibet, Founder</cite>
     </div>
   </div>
   <div class="pillars-grid">
@@ -191,22 +1258,22 @@
       <div class="pillar-name">Artistry</div>
       <p class="pillar-desc">Every piece carries a soul. The brief is the starting point — the work goes further.</p>
     </div>
-    <div class="pillar reveal">
+    <div class="pillar reveal reveal-delay-1">
       <div class="pillar-num">02</div>
       <div class="pillar-name">Precision</div>
-      <p class="pillar-desc">Details are not an afterthought. We refine every frame until it is exactly right.</p>
+      <p class="pillar-desc">Details are not an afterthought. We refine every frame until it is exactly right — then look again.</p>
     </div>
-    <div class="pillar reveal">
+    <div class="pillar reveal reveal-delay-2">
       <div class="pillar-num">03</div>
       <div class="pillar-name">Boldness</div>
       <p class="pillar-desc">We do not play safe. Premium does not mean timid — it means confident.</p>
     </div>
-    <div class="pillar reveal">
+    <div class="pillar reveal reveal-delay-3">
       <div class="pillar-num">04</div>
       <div class="pillar-name">Elevation</div>
       <p class="pillar-desc">Every project leaves our studio better than it arrived, better than anything comparable.</p>
     </div>
-    <div class="pillar reveal" style="grid-column: span 2;">
+    <div class="pillar reveal reveal-delay-4" style="grid-column: span 2;">
       <div class="pillar-num">05</div>
       <div class="pillar-name">Authenticity</div>
       <p class="pillar-desc">Ian's unconventional path is the spirit of the brand. Genuine creativity, honest craft, real results.</p>
@@ -214,73 +1281,404 @@
   </div>
 </section>
 
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="section-header">
+    <div>
+      <div class="section-label reveal">What We Do</div>
+      <h2 class="section-title reveal reveal-delay-1">Full-service<br><em>creative studio.</em></h2>
+    </div>
+    <a href="#booking" class="btn-ghost reveal reveal-delay-2">Request a Quote</a>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">①</div>
+      <div class="service-name">Photography</div>
+      <p class="service-desc">Editorial, portrait, product and event photography. Every shot is deliberate, composed and finished to a premium standard.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-icon">②</div>
+      <div class="service-name">Videography</div>
+      <p class="service-desc">Brand films, event coverage, promos and social content. Dynamic, impactful and delivered on time.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-icon">③</div>
+      <div class="service-name">Cinematography</div>
+      <p class="service-desc">Cinematic storytelling for music videos, short films and commercial content. Narrative-first, technically flawless.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-icon">④</div>
+      <div class="service-name">Graphic Design</div>
+      <p class="service-desc">Identities, layouts, social media visuals and packaging. Design that works as hard as it looks good.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-icon">⑤</div>
+      <div class="service-name">Brand Identity</div>
+      <p class="service-desc">Full brand systems: logo, colour palette, typography, usage guidelines and brand strategy. Built to last.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-3">
+      <div class="service-icon">⑥</div>
+      <div class="service-name">Graphics Printing</div>
+      <p class="service-desc">Large-format prints, fine-art prints, banners and premium marketing collateral. From screen to paper, precision preserved.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="work-section" id="work">
+  <div class="section-header">
+    <div>
+      <div class="section-label reveal">Portfolio</div>
+      <h2 class="section-title reveal reveal-delay-1">Selected<br><em>Work.</em></h2>
+    </div>
+  </div>
+  <div class="portfolio-filters reveal">
+    <button class="filter-btn active" onclick="filterWork(this, 'all')">All Work</button>
+    <button class="filter-btn" onclick="filterWork(this, 'photo')">Photography</button>
+    <button class="filter-btn" onclick="filterWork(this, 'film')">Film</button>
+    <button class="filter-btn" onclick="filterWork(this, 'design')">Design</button>
+    <button class="filter-btn" onclick="filterWork(this, 'brand')">Branding</button>
+  </div>
+  <div class="portfolio-grid reveal">
+    <div class="portfolio-item" data-cat="photo">
+      <div class="portfolio-placeholder">
+        <span class="portfolio-placeholder-text">Photography</span>
+        <span class="portfolio-category-tag">Photography</span>
+        <div class="portfolio-overlay">
+          <div class="portfolio-overlay-content">
+            <h3>Editorial Portrait Series</h3>
+            <p>Photography · 2024</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-cat="brand">
+      <div class="portfolio-placeholder">
+        <span class="portfolio-placeholder-text">Brand</span>
+        <span class="portfolio-category-tag">Branding</span>
+        <div class="portfolio-overlay">
+          <div class="portfolio-overlay-content">
+            <h3>Brand Identity System</h3>
+            <p>Branding · 2024</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-cat="film">
+      <div class="portfolio-placeholder">
+        <span class="portfolio-placeholder-text">Film</span>
+        <span class="portfolio-category-tag">Film</span>
+        <div class="portfolio-overlay">
+          <div class="portfolio-overlay-content">
+            <h3>Commercial Film</h3>
+            <p>Cinematography · 2024</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-cat="design">
+      <div class="portfolio-placeholder">
+        <span class="portfolio-placeholder-text">Design</span>
+        <span class="portfolio-category-tag">Design</span>
+        <div class="portfolio-overlay">
+          <div class="portfolio-overlay-content">
+            <h3>Campaign Visuals</h3>
+            <p>Graphic Design · 2024</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-cat="photo">
+      <div class="portfolio-placeholder">
+        <span class="portfolio-placeholder-text">Photo</span>
+        <span class="portfolio-category-tag">Photography</span>
+        <div class="portfolio-overlay">
+          <div class="portfolio-overlay-content">
+            <h3>Product Photography</h3>
+            <p>Photography · 2024</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-cat="film">
+      <div class="portfolio-placeholder">
+        <span class="portfolio-placeholder-text">Video</span>
+        <span class="portfolio-category-tag">Film</span>
+        <div class="portfolio-overlay">
+          <div class="portfolio-overlay-content">
+            <h3>Music Video</h3>
+            <p>Videography · 2024</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
 <div class="stats-section">
   <div class="stat-block reveal">
     <div class="stat-number">4<span>+</span></div>
     <div class="stat-label">Service Disciplines</div>
   </div>
-  <div class="stat-block reveal">
+  <div class="stat-block reveal reveal-delay-1">
     <div class="stat-number">4<span>×</span></div>
     <div class="stat-label">City Presence</div>
   </div>
-  <div class="stat-block reveal">
+  <div class="stat-block reveal reveal-delay-2">
     <div class="stat-number">1<span>.</span></div>
     <div class="stat-label">Standard: Premium</div>
   </div>
-  <div class="stat-block reveal">
+  <div class="stat-block reveal reveal-delay-3">
     <div class="stat-number">∞<span>.</span></div>
     <div class="stat-label">Creative Ambition</div>
   </div>
 </div>
 
-<section class="cta-band">
-  <div class="cta-band-bg"></div>
-  <div class="section-label reveal" style="text-align:center; color: var(--violet);">Start a Project</div>
-  <h2 class="cta-headline reveal">Your vision.<br><em>Elevated to art.</em></h2>
-  <div class="cta-actions reveal">
-    <a href="booking.html" class="btn-primary">Book a Session</a>
-    <a href="https://wa.me/254705214338" class="btn-ghost" target="_blank">WhatsApp Us</a>
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="section-header">
+    <div>
+      <div class="section-label reveal">Client Voices</div>
+      <h2 class="section-title reveal reveal-delay-1">What they<br><em>say.</em></h2>
+    </div>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal">
+      <p class="testimonial-text">"Arty Visuals didn't just deliver photos — they delivered a vision. Every frame told exactly the story we needed told."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">A</div>
+        <div>
+          <div class="author-name">Client Name</div>
+          <div class="author-role">Brand · Nairobi</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-1">
+      <p class="testimonial-text">"The brand identity Ian created for us was beyond what we imagined. It didn't just look good — it felt true."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background: var(--teal);">B</div>
+        <div>
+          <div class="author-name">Client Name</div>
+          <div class="author-role">Startup · Kenya</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-2">
+      <p class="testimonial-text">"Working with Arty Visuals elevated the entire perception of our brand. The quality is unmatched in this market."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background: var(--violet);">C</div>
+        <div>
+          <div class="author-name">Client Name</div>
+          <div class="author-role">Creative · Mombasa</div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<footer style="padding: 80px 20px; border-top: 1px solid var(--white08); text-align: center; background: var(--void);">
-  <div class="footer-logo" style="margin-bottom: 10px;">Arty<span>.</span>Visuals</div>
-  <div class="footer-tagline" style="font-family: var(--serif); font-style: italic; color: var(--white40); margin-bottom: 40px;">"Honest Art."</div>
-  
-  <div class="footer-social-grid" style="max-width: 600px; margin: 0 auto 40px; display: flex; flex-direction: column; gap: 24px; align-items: center;">
-    
-    <a href="https://wa.me/254705214338" target="_blank" style="text-decoration: none; color: var(--white); display: flex; align-items: center; gap: 12px; font-size: 14px; letter-spacing: 0.1em; border: 1px solid var(--white15); padding: 12px 24px; transition: 0.3s;">
-      <i class="fab fa-whatsapp" style="color: #25D366; font-size: 1.2rem;"></i>
-      WHATSAPP: 0705214338 — INSTANT BOOKING
+<!-- FOUNDER -->
+<section class="founder-section" id="founder">
+  <div class="founder-visual reveal">
+    <div class="founder-monogram">IK</div>
+    <div class="founder-placeholder-label">Ian Kibet — Founder & Creative Director</div>
+    <div class="founder-frame-accent"></div>
+  </div>
+  <div class="founder-copy">
+    <div class="about-label reveal">The Founder</div>
+    <h2 class="about-headline reveal reveal-delay-1">Ian Kibet.<br><em>An unconventional<br>creative.</em></h2>
+    <p class="about-body reveal reveal-delay-2">Ian Kibet studies agriculture — but his true harvest has always been visual art. Driven by an unshakeable passion for photography, film, design and brand identity, Ian founded Arty Visuals to build a studio that stands for something rare: uncompromising quality in everything it touches.</p>
+    <p class="about-body reveal reveal-delay-3">His unconventional journey is the very soul of Arty Visuals. He believes that genuine creativity does not follow a prescribed path — it breaks one.</p>
+    <div class="about-quote reveal reveal-delay-4">
+      <p>"Honest art is the translation of existence into expression. It isn't about being the best in the room — it's about being the most authentic to the journey."</p>
+      <cite>— Ian Kibet</cite>
+    </div>
+    <div style="margin-top: 40px;" class="reveal reveal-delay-5">
+      <a href="#booking" class="btn-primary">Commission Ian</a>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking-section" id="booking">
+  <div class="booking-bg"></div>
+  <div style="position: relative;">
+    <div class="section-label reveal">Start a Project</div>
+    <h2 class="booking-headline reveal reveal-delay-1">Your vision.<br><em>Elevated to art.</em></h2>
+    <p style="font-size: 15px; color: var(--white40); max-width: 440px; margin: 0 auto; position: relative;" class="reveal reveal-delay-2">Tell us about your project and we'll get back within 24 hours with a tailored proposal.</p>
+    <form class="booking-form reveal reveal-delay-3" onsubmit="handleSubmit(event)">
+      <div class="form-field">
+        <input type="text" placeholder="Your Name" required>
+      </div>
+      <div class="form-field">
+        <input type="email" placeholder="Email Address" required>
+      </div>
+      <div class="form-field">
+        <input type="tel" placeholder="Phone / WhatsApp">
+      </div>
+      <div class="form-field">
+        <select>
+          <option value="" disabled selected>Service Needed</option>
+          <option>Photography</option>
+          <option>Videography</option>
+          <option>Cinematography</option>
+          <option>Graphic Design</option>
+          <option>Brand Identity</option>
+          <option>Graphics Printing</option>
+          <option>Multiple Services</option>
+        </select>
+      </div>
+      <div class="form-field full">
+        <textarea placeholder="Tell us about your project — the story, the goals, the vision..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send Enquiry →</button>
+    </form>
+    <div id="form-success" style="display:none; margin-top: 40px;">
+      <p style="font-family: var(--serif); font-size: 22px; font-style: italic; color: var(--white);">Enquiry received. We'll be in touch soon.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-info">
+    <h2 class="reveal">Let's create<br>together.</h2>
+    <div class="contact-detail reveal reveal-delay-1">
+      <div class="contact-detail-label">WhatsApp</div>
+      <div class="contact-detail-value">
+        <a href="https://wa.me/254705214338">+254 705 214 338</a>
+        <div style="font-size: 11px; color: var(--white40); margin-top: 4px; letter-spacing: 0.08em;">Click for instant booking</div>
+      </div>
+    </div>
+    <div class="contact-detail reveal reveal-delay-2">
+      <div class="contact-detail-label">Email</div>
+      <div class="contact-detail-value">
+        <a href="mailto:artyvisuals254@gmail.com">artyvisuals254@gmail.com</a>
+      </div>
+    </div>
+    <div class="contact-detail reveal reveal-delay-3">
+      <div class="contact-detail-label">Locations</div>
+      <div class="contact-detail-value">
+        <div class="locations-list">
+          <span class="location-tag">Nairobi</span>
+          <span class="location-tag">Mombasa</span>
+          <span class="location-tag">Kakamega</span>
+          <span class="location-tag">Trans Nzoia</span>
+          <span class="location-tag">Bungoma</span>
+        </div>
+      </div>
+    </div>
+    <div class="social-links reveal reveal-delay-4">
+      <a href="https://instagram.com/artyv.isuals" class="social-link" target="_blank">Instagram</a>
+      <a href="https://facebook.com/ArtyVisuals" class="social-link" target="_blank">Facebook</a>
+      <a href="https://tiktok.com/@arty_visuals" class="social-link" target="_blank">TikTok</a>
+    </div>
+  </div>
+  <div class="reveal reveal-delay-1">
+    <div class="section-label" style="margin-bottom: 28px;">Instant Connect</div>
+    <a href="https://wa.me/254705214338" class="whatsapp-cta" target="_blank">
+      💬 &nbsp; WhatsApp for Instant Booking
     </a>
-
-    <div style="display: flex; gap: 30px; align-items: center; justify-content: center; flex-wrap: wrap;">
-      <a href="/cdn-cgi/l/email-protection#33475b565241474a455a4046525f4073545e525a5f1d505c5e" title="Email" style="color: var(--white70); text-decoration: none; font-size: 1.3rem; transition: 0.3s;"><i class="fas fa-envelope"></i></a>
-      <a href="https://instagram.com/artyv.isuals" target="_blank" title="Instagram" style="color: var(--white70); text-decoration: none; font-size: 1.3rem; transition: 0.3s;"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.facebook.com/profile.php?id=61576486607504" target="_blank" title="Facebook" style="color: var(--white70); text-decoration: none; font-size: 1.3rem; transition: 0.3s;"><i class="fab fa-facebook-f"></i></a>
-      <a href="https://tiktok.com/@arty_visuals" target="_blank" title="TikTok" style="color: var(--white70); text-decoration: none; font-size: 1.3rem; transition: 0.3s;"><i class="fab fa-tiktok"></i></a>
+    <div style="margin-top: 48px; padding: 40px; background: var(--void-mid);">
+      <div style="font-family: var(--serif); font-size: 36px; font-weight: 300; font-style: italic; color: var(--white70); line-height: 1.3; margin-bottom: 20px;">"State of the art.<br>Every frame."</div>
+      <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red);">Arty Visuals · Campaign Line</div>
     </div>
-
-    <div style="display: flex; flex-direction: column; gap: 5px; font-size: 11px; color: var(--white40); letter-spacing: 0.15em; text-transform: uppercase;">
-      <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2d5945484c5f59545b445e584c415e6d4a404c4441034e4240">[email&#160;protected]</a></span>
-      <span>@artyv.isuals • @arty_visuals</span>
+    <div style="margin-top: 2px; padding: 28px 40px; background: var(--void-lifted);">
+      <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white40); margin-bottom: 12px;">Our Promise</div>
+      <div style="font-size: 14px; color: var(--white70); line-height: 1.7;">Your vision. Elevated to art. Every deliverable is an honest translation of your journey — built to endure beyond the moment it was made.</div>
     </div>
   </div>
+</section>
 
-  <div class="footer-copy" style="font-size: 10px; color: var(--white15); letter-spacing: 0.2em; text-transform: uppercase;">
-    © 2026 Arty Visuals · Ian Kibet · Nairobi, Kenya
-  </div>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Arty<span>.</span>Visuals</div>
+  <div class="footer-tagline">"Honest Art."</div>
+  <div class="footer-copy">© 2026 Arty Visuals · Ian Kibet · Nairobi, Kenya</div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
+  /* ── SCROLL REVEAL ── */
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  const menuToggle = document.getElementById('mobile-menu');
-  const navLinks = document.querySelector('.nav-links');
+  /* ── NAV SCROLL TINT ── */
+  const mainNav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    mainNav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  /* ── HAMBURGER MENU ── */
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileOverlay = document.getElementById('mobile-overlay');
+
+  function openMenu() {
+    menuToggle.classList.add('open');
+    menuToggle.setAttribute('aria-expanded', 'true');
+    mobileOverlay.classList.add('open');
+    mobileOverlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    menuToggle.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    mobileOverlay.classList.remove('open');
+    mobileOverlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
 
   menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    const icon = menuToggle.querySele
+    menuToggle.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeMenu();
+  });
+
+  mobileOverlay.addEventListener('click', e => {
+    if (e.target === mobileOverlay) closeMenu();
+  });
+
+  /* ── PORTFOLIO FILTER ── */
+  function filterWork(btn, cat) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.portfolio-item').forEach(item => {
+      const show = cat === 'all' || item.dataset.cat === cat;
+      item.style.opacity = show ? '1' : '0.2';
+      item.style.pointerEvents = show ? 'auto' : 'none';
+    });
+  }
+
+  /* ── FORM SUBMIT ── */
+  function handleSubmit(e) {
+    e.preventDefault();
+    e.target.style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
+
+  /* ── ACTIVE NAV LINK ── */
+  const navLinkEls = document.querySelectorAll('.nav-links a');
+  const sectionEls = document.querySelectorAll('section[id]');
+
+  const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinkEls.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sectionEls.forEach(s => sectionObserver.observe(s));
+</script>
+</body>
+</html>
