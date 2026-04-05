@@ -123,20 +123,18 @@
   <form 
     class="booking-form reveal" 
     id="booking-form"
-    action="https://formspree.io/f/xzdkkkga" 
-    method="POST"
   >
     <div class="form-field">
-      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="text" name="name" id="user-name" placeholder="Your Name" required>
     </div>
     <div class="form-field">
-      <input type="email" name="email" placeholder="Email Address" required>
+      <input type="email" name="email" id="user-email" placeholder="Email Address" required>
     </div>
     <div class="form-field">
-      <input type="tel" name="phone" placeholder="Phone / WhatsApp">
+      <input type="tel" name="phone" id="user-phone" placeholder="Phone / WhatsApp">
     </div>
     <div class="form-field">
-      <select name="service" required>
+      <select name="service" id="user-service" required>
         <option value="" disabled selected>Service Needed</option>
         <option value="Photography">Photography</option>
         <option value="Videography">Videography</option>
@@ -148,15 +146,14 @@
       </select>
     </div>
     <div class="form-field full">
-      <textarea name="message" placeholder="Tell us about your project — the story, the goals, the vision..." required></textarea>
+      <textarea name="message" id="user-message" placeholder="Tell us about your project — the story, the goals, the vision..." required></textarea>
     </div>
     
-    <input type="hidden" name="_subject" value="New Booking Enquiry — Arty Visuals">
     <button type="submit" id="submit-btn" class="form-submit">Send Enquiry →</button>
   </form>
 
   <div id="form-success">
-    <p style="font-family: var(--serif); font-size: 22px; font-style: italic; color: var(--white);">Enquiry received. We'll be in touch soon.</p>
+    <p style="font-family: var(--serif); font-size: 22px; font-style: italic; color: var(--white);">Redirecting to WhatsApp...</p>
   </div>
 
   <div class="or-divider reveal">
@@ -192,45 +189,40 @@
     menuToggle.querySelector('i').classList.toggle('fa-times');
   });
 
-  // Working Formspree Submission Logic
+  // WhatsApp Send Logic
   const form = document.getElementById('booking-form');
   const button = document.getElementById('submit-btn');
   const successMsg = document.getElementById('form-success');
 
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    button.disabled = true;
-    button.textContent = "Sending...";
+  form.addEventListener("submit", (event) => {
+    event.preventDefault(); // Stop page from refreshing
+    
+    // 1. Collect form data
+    const name = document.getElementById('user-name').value;
+    const email = document.getElementById('user-email').value;
+    const phone = document.getElementById('user-phone').value || "Not provided";
+    const service = document.getElementById('user-service').value;
+    const message = document.getElementById('user-message').value;
 
-    const data = new FormData(event.target);
+    // 2. Format the message for WhatsApp
+    // Using * for bold text and %0A for line breaks
+    const whatsappNumber = "254705214338";
+    const text = `*New Booking Enquiry — Arty Visuals*%0A%0A` +
+                 `*Client:* ${name}%0A` +
+                 `*Email:* ${email}%0A` +
+                 `*Phone:* ${phone}%0A` +
+                 `*Service:* ${service}%0A%0A` +
+                 `*Project Details:*%0A${message}`;
 
-    try {
-      const response = await fetch(event.target.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
+    // 3. Construct the WhatsApp URL
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${text}`;
 
-      if (response.ok) {
-        form.style.display = 'none';
-        successMsg.style.display = 'block';
-        
-        // Redirect to WhatsApp after 1.5s
-        setTimeout(() => {
-          const msg = encodeURIComponent("Hello Arty Visuals! I just submitted a project enquiry through your website and would love to discuss it further.");
-          window.open('https://wa.me/254705214338?text=' + msg, '_blank');
-        }, 1500);
-      } else {
-        const errorData = await response.json();
-        alert("Oops! " + (errorData.errors ? errorData.errors.map(e => e.message).join(", ") : "Submission failed."));
-        button.disabled = false;
-        button.textContent = "Send Enquiry →";
-      }
-    } catch (error) {
-      alert("Connectivity issue. Please check your internet connection.");
-      button.disabled = false;
-      button.textContent = "Send Enquiry →";
-    }
+    // 4. Update UI feedback
+    form.style.display = 'none';
+    successMsg.style.display = 'block';
+
+    // 5. Open WhatsApp in a new tab
+    window.open(whatsappURL, '_blank');
   });
 </script>
 </body>
