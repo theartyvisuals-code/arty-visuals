@@ -43,7 +43,7 @@
   .booking-form { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; max-width: 700px; margin: 0 auto; background: var(--white08); position: relative; }
   .form-field { background: var(--void-soft); padding: 0; }
   .form-field.full { grid-column: span 2; }
-  .form-field input, .form-field select, .form-field textarea { width: 100%; background: transparent; border: none; outline: none; padding: 24px 28px; font-family: var(--sans); font-size: 14px; font-weight: 400; color: var(--white); letter-spacing: 0.03em; -webkit-appearance: none; }
+  .form-field input, .form-field select, .form-field textarea { width: 100%; background: transparent; border: none; outline: none; padding: 24px 28px; font-family: var(--sans); font-size: 14px; font-weight: 400; color: var(--white); letter-spacing: 0.03em; appearance: none; -webkit-appearance: none; }
   .form-field select { cursor: pointer; }
   .form-field input::placeholder, .form-field textarea::placeholder { color: var(--white40); }
   .form-field select option { background: var(--void); }
@@ -79,6 +79,64 @@
     .booking-form { grid-template-columns: 1fr; }
     .form-field.full, .form-submit { grid-column: span 1; }
     footer { flex-direction: column; gap: 20px; text-align: center; padding: 40px 24px; }
+    @media (max-width: 768px) {
+  /* Navigation Adjustments */
+  nav {
+    padding: 15px 25px;
+  }
+  
+  .menu-toggle {
+    display: block !important;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    height: 100vh;
+    background: var(--void-mid);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    transition: 0.4s ease-in-out;
+    backdrop-filter: blur(10px);
+    border-left: 1px solid var(--white08);
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+
+  /* Layout Spacing */
+  .hero, .page-hero, .work-section, section, footer {
+    padding: 80px 25px 40px !important;
+  }
+
+  .page-hero-title {
+    font-size: 45px !important;
+  }
+
+  /* Grid Stacking */
+  .portfolio-grid {
+    grid-template-columns: 1fr !important; /* Stack work items vertically */
+  }
+
+  .portfolio-item, .portfolio-item.wide, .portfolio-item.tall {
+    grid-column: span 1 !important;
+    aspect-ratio: 1/1 !important;
+  }
+
+  /* Services & Booking Form */
+  .services-grid, .process-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .booking-container {
+    padding: 20px !important;
+  }
+}
   }
 </style>
 </head>
@@ -86,6 +144,9 @@
 
 <nav>
   <a href="index.html" class="nav-logo">Arty<span>.</span>Visuals</a>
+  <div class="menu-toggle" id="mobile-menu" style="display: none; cursor: pointer; z-index: 101;">
+  <i class="fas fa-bars" style="font-size: 24px; color: var(--white);"></i>
+</div>
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
     <li><a href="services.html">Services</a></li>
@@ -224,6 +285,25 @@
       button.disabled = false;
     }
   }
+</script>
+<script>
+  const menuToggle = document.getElementById('mobile-menu');
+  const navLinks = document.querySelector('.nav-links');
+
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    // Change icon between bars and times (X)
+    const icon = menuToggle.querySelector('i');
+    icon.classList.toggle('fa-bars');
+    icon.classList.toggle('fa-times');
+  });
+
+  // Close menu when a link is clicked
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+    });
+  });
 </script>
 </body>
 </html>
